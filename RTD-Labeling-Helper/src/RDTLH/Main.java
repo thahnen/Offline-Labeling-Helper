@@ -1,26 +1,38 @@
 package RDTLH;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.opencv.core.Core;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("res/UI.fxml"));
-        primaryStage.setScene(new Scene(root));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("res/UI.fxml")));
+
+        Controller controller = loader.getController();
+
+        Scene scene = new Scene((Pane) loader.load());
+        primaryStage.setScene(scene);
         primaryStage.setTitle("RTD Labeling Helper");
+        primaryStage.setOnCloseRequest((new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                // do it, just do it!
+            }
+        }));
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
+        // Loading is necessary!
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
         launch(args);
     }
 }

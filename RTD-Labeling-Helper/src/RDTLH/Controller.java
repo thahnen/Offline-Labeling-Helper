@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -80,6 +81,7 @@ public class Controller {
                 return;
             }
 
+            // Die einzelnen Frames verarbeiten (kann einen Moment dauern!)
             VideoCapture cap = new VideoCapture(video.getAbsolutePath());
             ArrayList<Image> frames = new ArrayList<>();
             while (true) {
@@ -97,15 +99,102 @@ public class Controller {
                 }
             }
 
+            // Vorher noch ueberpruefen, ob die Liste nicht vielleicht sogar leer ist!
             this.model.setFrames(frames);
+
+            try {
+                this.currentFrame.setImage(model.getFrameByIndex(0));
+                this.nextFrame.setImage(model.getFrameByIndex(1));
+            } catch (Exception e) {
+                System.out.println(e);
+                return;
+            }
+
+            this.model.setCurrentFrameId(0);
         }
     }
 
     @FXML protected void getLastFrame(ActionEvent event){
+        if (this.model.getFramesAmount() == 0) {
+            return;
+        }
 
+        int id = this.model.getCurrentFrameId();
+        // DEBUG:
+        System.out.println("Vorher: " + id);
+        if (id == 0) {
+            // Man kann nicht weiter zurueck gehen, es ist das allererste Frame ausgewaehlt!
+            return;
+        }
+
+        try {
+            this.nextFrame.setImage(model.getFrameByIndex(id));
+            this.currentFrame.setImage(model.getFrameByIndex(--id));
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+
+        this.model.setCurrentFrameId(id);
+        // DEBUG:
+        System.out.println("Nachher: " + id);
     }
 
+
+    /**
+     *  Handler getNextFrame (triggered wenn man auf den Button "Weiter >" drueckt)
+     *  => das naechste Frame wird zum aktuellen Frame gesetzt und das naechste Frame auf das uebernaechste (wenn vorhanden)
+     */
     @FXML protected void getNextFrame(ActionEvent event){
+        int amount = this.model.getFramesAmount();
+        if (amount == 0) {
+            return;
+        }
 
+        int id = this.model.getCurrentFrameId();
+        // DEBUG:
+        System.out.println("Vorher: " + id);
+        if (id == amount-1) {
+            // Man kann nicht weiter vorwaerts gehen, es ist das allerletzte Frame ausgewaehlt!
+            return;
+        } else if (id == amount-2) {
+            this.nextFrame.setImage(null);
+        } else {
+            try {
+                this.nextFrame.setImage(model.getFrameByIndex(id+2));
+            } catch (Exception e) {
+                System.out.println(e);
+                return;
+            }
+        }
+
+        try {
+            this.currentFrame.setImage(model.getFrameByIndex(++id));
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+
+        this.model.setCurrentFrameId(id);
+        // DEBUG:
+        System.out.println("Nachher: " + id);
     }
+
+
+    @FXML protected void backBtnHandleKeyPressed(KeyEvent event) {
+        // Hier ueberpruefen, wo der Fokus liegt und ob Enter gedrueckt wurde!
+        // => dann muss der Fokus ggf umgesetzt werden und bei Enter soll doppelte Aktion verhindert werden!
+        System.out.println(event.getCode());
+        this.getLastFrame(null);
+    }
+
+
+    @FXML protected void nextBtnHandleKeyPressed(KeyEvent event) {
+        // Hier ueberpruefen, wo der Fokus liegt und ob Enter gedrueckt wurde!
+        // => dann muss der Fokus ggf umgesetzt werden und bei Enter soll doppelte Aktion verhindert werden!
+        System.out.println(event.getCode());
+        this.getNextFrame(null);
+    }
+
+    // TODO: noch einen EventHandler fur den "Video laden" Button!
 }
