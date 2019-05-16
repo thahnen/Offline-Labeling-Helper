@@ -7,11 +7,13 @@ import java.util.ArrayList;
 public class Model {
     private int currentFrameId;
     private ArrayList<Image> frames;
+    private ArrayList<FrameData> frame_info;
 
 
     public Model() {
         this.currentFrameId = 0;
         this.frames = null;
+        this.frame_info = null;
     }
 
 
@@ -21,7 +23,6 @@ public class Model {
     public int getCurrentFrameId() {
         return currentFrameId;
     }
-
     public void setCurrentFrameId(int new_id) {
         this.currentFrameId = new_id;
     }
@@ -51,6 +52,21 @@ public class Model {
 
     public void setFrames(ArrayList<Image> new_frames) {
         this.frames = new_frames;
+    }
+
+
+    /**
+     *  Funktionen rund um die Liste der Frame-Daten
+     */
+    public ArrayList<FrameData> getFrameInfo() throws Exception {
+        if (frame_info != null) {
+            return frame_info;
+        }
+        throw new NotFoundException("List of Frame-Info is null!");
+    }
+
+    public void setFrameInfo(ArrayList<FrameData> new_frame_info) {
+        this.frame_info = new_frame_info;
     }
 }
 

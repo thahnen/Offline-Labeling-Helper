@@ -1,6 +1,7 @@
 package RDTLH;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -8,16 +9,31 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.simple.*;
+
+
+/***********************************************************************************************************************
+ *
+ *      INHALT DER KLASS CONTROLLER
+ *      ===========================
+ *
+ *      Alle FXML-Elmente, die es gibt
+ *
+ *      Model model, das alle Daten beinhaltet!
+ *
+ ***********************************************************************************************************************/
 
 
 public class Controller {
@@ -34,36 +50,56 @@ public class Controller {
         this.model = new Model();
     }
 
+
+    /**
+     *  Handler loadVideo (wenn Button "Video laden" gedrueckt)
+     *  => liest ein Video ein: in der Version Frame fuer Frame, was lange dauert und nicht gross sein darf!
+     *  => liest die Labels ein: in der Version ueber JSON
+     *
+     *  TODO: ggf anstatt eines FileChooser's für ein Video + Label-Datei, DirectoryChooser nehmen für Frames + Label-Datei
+     *  TODO: => dann müssen nicht ALLE Frames des Videos eingelesen werden sondern kann dynamischer gemacht werden!
+     *
+     *  TODO: mehr Formate unterstuetzen fuer die Label und fuer das Video/ die Frames!
+     *
+     *  TODO: bei Fehlern ein PopUp oeffnen mit entsprechendem Text!
+     */
     @FXML protected void loadVideo(ActionEvent event) {
         FileChooser chooser = new FileChooser();
 
         String os = System.getProperty("os.name").toLowerCase();
-        if (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0) {
+        if (os.contains("nix") || os.contains("nux")) {
             // Linux
             chooser.setInitialDirectory(new File(System.getenv("HOME")));
         } else {
-            // Windows
+            // Windows oder etwas anderes!
         }
 
         chooser.setTitle("Video und Label-Datei auswaehlen!");
 
         List<File> dateien = chooser.showOpenMultipleDialog(((Node) event.getSource()).getScene().getWindow());
         if (dateien != null) {
-            // 1. Datei muss ein Video sein
-            // 2. Datei muss eine JSON-Datei sein!
+            // 1) Es muessen genau 2 Dateien sein!
+            // 2) Eine der Dateien muss ein Video sein, das andere eine JSON-Datei
             if (dateien.size() != 2) {
-                // Fehlerbehandlung, es muessen genau zwei Datein ausgewaehlt werden!
+                /**
+                 *  FEHLERBEHANDLUNG: ANZAHL DATEIEN != 2
+                 */
                 System.out.println("Es wurden nicht genau zwei Dateien ausgewaehlt!");
                 return;
             } else if (!(dateien.get(0).getName().endsWith(".json") || dateien.get(1).getName().endsWith(".json"))) {
-                // Fehlerbehandlung, es muss eine JSON-Datei dabei sein die die Label enthaelt!
+                /**
+                 *  FEHLERBEHANDLUNG: KEINE JSON-DATEI AUSGEWAEHLT
+                 */
                 System.out.println("Es wurde keine JSON-Datei mit ausgewaehlt!");
                 return;
             } else if (!(dateien.get(0).getName().endsWith(".avi") || dateien.get(1).getName().endsWith(".avi"))) {
-                // Fehlerbehandlung, es muss eine AVI-Datei dabei sein, die das Video enthaelt!
+                /**
+                 *  FEHLERBEHANDLUNG: KEINE AVI-VIDEO-DATEI AUSGEWAEHLT
+                 */
                 System.out.println("Es wurde keien AVI-Datei mit ausgewaehlt!");
                 return;
             }
+
 
             File video, label;
             if (dateien.get(0).getName().endsWith(".json")) {
@@ -74,6 +110,97 @@ public class Controller {
                 video = dateien.get(0);
             }
 
+
+            // 1) JSON-Datei einlesen
+            JSONArray array;
+            try {
+                array = (JSONArray) new JSONParser().parse(new FileReader(label.getAbsolutePath()));
+            } catch (FileNotFoundException e) {
+                // sollte eigentlich vorkommen koennen!
+                System.out.println("Irgendwelche FileNotFound-Fehler bei JSON");
+                return;
+            } catch (IOException e) {
+                /**
+                 *  FEHLERBEHANDLUNG: IRGENDEIN FEHLER BEIM EINLESEN
+                 */
+                System.out.println("Irgendwelche IO Fehler bei JSON");
+                return;
+            } catch (ParseException e) {
+                /**
+                 *  FEHLERBEHANDLUNG: IRGENDWAS STIMMT MIT DEM JSON NICHT
+                 */
+                System.out.println("Irgendwelche JSON-Parser Fehler bei JSON");
+                return;
+            }
+
+            ArrayList<FrameData> frame_info = new ArrayList<>();
+            for (Object o : array) {
+                /**
+                 *  JSON sollte wie folgt aussehen (ist ein Array):
+                 *
+                 *  {
+                 *      "frame_nr" : Int,
+                 *      "image_url" : String    => ist egal!
+                 *      "external_id" : String  => ist egal!
+                 *      "prediction_label" {
+                 *          "object" : [
+                 *              {
+                 *                  "label_id" : Int
+                 *                  "geometry" : [
+                 *                      { "x" : Int, "y" : Int },   => P1       P1->--P2
+                 *                      { "x" : Int, "y" : Int },   => P2       |      |
+                 *                      { "x" : Int, "y" : Int },   => P3       |      |
+                 *                      { "x" : Int, "y" : Int }    => P4       P4--<-P3
+                 *                  ]
+                 *              },
+                 *              [...]
+                 *          ]
+                 *      }
+                 *  }
+                 */
+                JSONObject info = (JSONObject) o;
+                ArrayList<Label> found_labels = new ArrayList<>();
+
+                // TODO: das hier hinter eigentlich noch in einen Try-Catch-Block einbauen, ich nehme an, dass das so vorliegt!!!
+                int frame_nr = (int) ((long) info.get("frame_nr"));
+
+                for (Object obj : (JSONArray)((JSONObject)info.get("prediction_label")).get("object")) {
+                    JSONObject label_obj = (JSONObject) obj;
+
+                    // TODO: hier genauer gucken, vlt muss das zum casten etwas auseinander genommen werden!
+                    JSONObject[] geometry = (JSONObject[])((JSONArray) label_obj.get("geometry")).toArray();
+
+                    int label_id = (int) label_obj.get("label_id");
+                    Point2D p1 = new Point2D(
+                            (int) geometry[0].get("x"),
+                            (int) geometry[0].get("y")
+                    );
+                    Point2D p2 = new Point2D(
+                            (int) geometry[1].get("x"),
+                            (int) geometry[1].get("y")
+                    );
+                    Point2D p3 = new Point2D(
+                            (int) geometry[2].get("x"),
+                            (int) geometry[2].get("y")
+                    );
+                    Point2D p4 = new Point2D(
+                            (int) geometry[3].get("x"),
+                            (int) geometry[3].get("y")
+                    );
+
+                    found_labels.add(new Label(
+                            label_id, p1, p2, p3, p4
+                    ));
+                }
+
+                frame_info.add(new FrameData(
+                        frame_nr, found_labels
+                ));
+            }
+            this.model.setFrameInfo(frame_info);
+
+
+            // 2) Video(-Frames) einlesen
             // Nur Videos unter 50mb nehmen!
             System.out.println("Videogroesse: " + (video.length() / (1024*1024)) + "mb");
             if ((video.length() / (1024*1024)) > 50) {
@@ -111,9 +238,18 @@ public class Controller {
             }
 
             this.model.setCurrentFrameId(0);
+        } else {
+            /**
+             *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
+             */
         }
     }
 
+
+    /**
+     *  Handler getLastFrames (wenn Button "< Zurück" gedrueckt)
+     *  => das vorherige Frame wird im aktuellen Frame angezeigt und das aktuelle im naechsten!
+     */
     @FXML protected void getLastFrame(ActionEvent event){
         if (this.model.getFramesAmount() == 0) {
             return;
@@ -142,8 +278,8 @@ public class Controller {
 
 
     /**
-     *  Handler getNextFrame (triggered wenn man auf den Button "Weiter >" drueckt)
-     *  => das naechste Frame wird zum aktuellen Frame gesetzt und das naechste Frame auf das uebernaechste (wenn vorhanden)
+     *  Handler getNextFrame (wenn Button "Weiter >" gedrueckt)
+     *  => das naechste Frame wird im aktuellen Frame angezeigt und das uebernaechste im naechsten!
      */
     @FXML protected void getNextFrame(ActionEvent event){
         int amount = this.model.getFramesAmount();
@@ -181,6 +317,11 @@ public class Controller {
     }
 
 
+    /*******************************************************************************************************************
+     *
+     *      TODO: JEDEM FXML-ELMENT einen Handler hinzufuegen, wenn irgendein Button gedrueckt wurde!
+     *
+     *******************************************************************************************************************/
     @FXML protected void backBtnHandleKeyPressed(KeyEvent event) {
         // Hier ueberpruefen, wo der Fokus liegt und ob Enter gedrueckt wurde!
         // => dann muss der Fokus ggf umgesetzt werden und bei Enter soll doppelte Aktion verhindert werden!
