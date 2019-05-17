@@ -1,5 +1,6 @@
 package RDTLH;
 
+import RDTLH.data.FrameData;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 
@@ -31,19 +32,17 @@ public class Model {
     /**
      *  Funktionen rund um die Liste der Frames
      */
-    public ArrayList<Image> getFrames() throws Exception {
-        if (frames != null) {
-            return frames;
-        }
-        throw new NotFoundException("List of frames is null!");
+    public ArrayList<Image> getFrames() {
+        assert frames != null;
+        return frames;
     }
 
-    public Image getFrameByIndex(int index) throws Exception {
+    public Image getFrameByIndex(int index) throws IndexOutOfBoundsException {
         assert frames != null;
         if (index >= 0 && index < frames.size()) {
             return frames.get(index);
         }
-        throw new NotFoundException("Requested index is out of bounds!");
+        throw new IndexOutOfBoundsException("The id requesting a frame is outside of [0, frames.size()] !");
     }
 
     public int getFramesAmount() {
@@ -58,24 +57,12 @@ public class Model {
     /**
      *  Funktionen rund um die Liste der Frame-Daten
      */
-    public ArrayList<FrameData> getFrameInfo() throws Exception {
-        if (frame_info != null) {
-            return frame_info;
-        }
-        throw new NotFoundException("List of Frame-Info is null!");
+    public ArrayList<FrameData> getFrameInfo() {
+        assert frame_info != null;
+        return frame_info;
     }
 
     public void setFrameInfo(ArrayList<FrameData> new_frame_info) {
         this.frame_info = new_frame_info;
-    }
-}
-
-
-final class NotFoundException extends Exception {
-    public NotFoundException() {
-        super();
-    }
-    public NotFoundException(String msg) {
-        super(msg);
     }
 }

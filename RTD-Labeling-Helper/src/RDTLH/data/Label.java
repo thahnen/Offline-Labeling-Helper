@@ -1,6 +1,7 @@
-package RDTLH;
+package RDTLH.data;
 
 import javafx.geometry.Point2D;
+
 
 public class Label {
     private int label_id;

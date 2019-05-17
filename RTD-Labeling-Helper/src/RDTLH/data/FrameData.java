@@ -1,9 +1,7 @@
-package RDTLH;
-
-
-import javafx.geometry.Point2D;
+package RDTLH.data;
 
 import java.util.ArrayList;
+
 
 public class FrameData {
     int frame_nr;

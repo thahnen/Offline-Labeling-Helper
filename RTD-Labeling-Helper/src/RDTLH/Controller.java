@@ -1,7 +1,8 @@
 package RDTLH;
 
+import RDTLH.data.FrameData;
+import RDTLH.util.FileUtil;
 import javafx.fxml.FXML;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,19 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
-import org.opencv.videoio.VideoCapture;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.json.simple.*;
 
 
 /***********************************************************************************************************************
@@ -29,9 +21,17 @@ import org.json.simple.*;
  *      INHALT DER KLASS CONTROLLER
  *      ===========================
  *
- *      Alle FXML-Elmente, die es gibt
+ *      - Alle FXML-Elmente, die es gibt
+ *      - Model model, das alle Daten beinhaltet!
  *
- *      Model model, das alle Daten beinhaltet!
+ *      Handler (Buttons):
+ *      - loadVideo         =>      laed ein Video(/Frames) und Label ein
+ *      - getLastFrame      =>      setzt die ImageView's neu
+ *      - getNextFrame      =>      setzt die ImageView's neu
+ *      - handleBtnPress    =>      handhabt die Steuerung per Tastendruck      => TODO: fehlt noch
+ *
+ *      Handler (ImageView):
+ *      - handleMouseClick  =>      handhabt das Auswaehlen von einzelnen Labels
  *
  ***********************************************************************************************************************/
 
@@ -78,6 +78,7 @@ public class Controller {
 
         List<File> dateien = chooser.showOpenMultipleDialog(((Node) event.getSource()).getScene().getWindow());
         if (dateien != null) {
+            /** 1) Dateien auf Richtigkeit ueberpruefen */
             // 1) Es muessen genau 2 Dateien sein!
             // 2) Eine der Dateien muss ein Video sein, das andere eine JSON-Datei
             if (dateien.size() != 2) {
@@ -111,96 +112,19 @@ public class Controller {
             }
 
 
-            // 1) JSON-Datei einlesen
-            JSONArray array;
+            /** 2) Labels als FrameData einlesen! */
             try {
-                array = (JSONArray) new JSONParser().parse(new FileReader(label.getAbsolutePath()));
-            } catch (FileNotFoundException e) {
-                // sollte eigentlich vorkommen koennen!
-                System.out.println("Irgendwelche FileNotFound-Fehler bei JSON");
-                return;
-            } catch (IOException e) {
-                /**
-                 *  FEHLERBEHANDLUNG: IRGENDEIN FEHLER BEIM EINLESEN
-                 */
-                System.out.println("Irgendwelche IO Fehler bei JSON");
-                return;
-            } catch (ParseException e) {
-                /**
-                 *  FEHLERBEHANDLUNG: IRGENDWAS STIMMT MIT DEM JSON NICHT
-                 */
-                System.out.println("Irgendwelche JSON-Parser Fehler bei JSON");
+                ArrayList<FrameData> frame_info = FileUtil.loadLabelsFromJSON(label);
+                this.model.setFrameInfo(frame_info);
+            } catch (Exception e) {
+                // TODO: das hier muss später noch etwas genauer gemacht werden mit unterschiedlichen Exceptions!
+                System.out.println(e);
                 return;
             }
-
-            ArrayList<FrameData> frame_info = new ArrayList<>();
-            for (Object o : array) {
-                /**
-                 *  JSON sollte wie folgt aussehen (ist ein Array):
-                 *
-                 *  {
-                 *      "frame_nr" : Int,
-                 *      "image_url" : String    => ist egal!
-                 *      "external_id" : String  => ist egal!
-                 *      "prediction_label" {
-                 *          "object" : [
-                 *              {
-                 *                  "label_id" : Int
-                 *                  "geometry" : [
-                 *                      { "x" : Int, "y" : Int },   => P1       P1->--P2
-                 *                      { "x" : Int, "y" : Int },   => P2       |      |
-                 *                      { "x" : Int, "y" : Int },   => P3       |      |
-                 *                      { "x" : Int, "y" : Int }    => P4       P4--<-P3
-                 *                  ]
-                 *              },
-                 *              [...]
-                 *          ]
-                 *      }
-                 *  }
-                 */
-                JSONObject info = (JSONObject) o;
-                ArrayList<Label> found_labels = new ArrayList<>();
-
-                // TODO: das hier hinter eigentlich noch in einen Try-Catch-Block einbauen, ich nehme an, dass das so vorliegt!!!
-                int frame_nr = (int) ((long) info.get("frame_nr"));
-
-                for (Object obj : (JSONArray)((JSONObject)info.get("prediction_label")).get("object")) {
-                    JSONObject label_obj = (JSONObject) obj;
-
-                    // TODO: hier genauer gucken, vlt muss das zum casten etwas auseinander genommen werden!
-                    JSONObject[] geometry = (JSONObject[])((JSONArray) label_obj.get("geometry")).toArray();
-
-                    int label_id = (int) label_obj.get("label_id");
-                    Point2D p1 = new Point2D(
-                            (int) geometry[0].get("x"),
-                            (int) geometry[0].get("y")
-                    );
-                    Point2D p2 = new Point2D(
-                            (int) geometry[1].get("x"),
-                            (int) geometry[1].get("y")
-                    );
-                    Point2D p3 = new Point2D(
-                            (int) geometry[2].get("x"),
-                            (int) geometry[2].get("y")
-                    );
-                    Point2D p4 = new Point2D(
-                            (int) geometry[3].get("x"),
-                            (int) geometry[3].get("y")
-                    );
-
-                    found_labels.add(new Label(
-                            label_id, p1, p2, p3, p4
-                    ));
-                }
-
-                frame_info.add(new FrameData(
-                        frame_nr, found_labels
-                ));
-            }
-            this.model.setFrameInfo(frame_info);
+            System.out.println("FrameData set: " + this.model.getFrameInfo().size());
 
 
-            // 2) Video(-Frames) einlesen
+            /** 3) Video(-Frames) einlesen */
             // Nur Videos unter 50mb nehmen!
             System.out.println("Videogroesse: " + (video.length() / (1024*1024)) + "mb");
             if ((video.length() / (1024*1024)) > 50) {
@@ -209,26 +133,18 @@ public class Controller {
             }
 
             // Die einzelnen Frames verarbeiten (kann einen Moment dauern!)
-            VideoCapture cap = new VideoCapture(video.getAbsolutePath());
-            ArrayList<Image> frames = new ArrayList<>();
-            while (true) {
-                Mat frame = new Mat();
-                if (cap.read(frame)) {
-                    // Convert the frame back to Grayscale because it got converted!
-                    Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
-
-                    // Convert into an image for the ImageView!
-                    MatOfByte buffer = new MatOfByte();
-                    Imgcodecs.imencode(".png", frame, buffer);
-                    frames.add(new Image(new ByteArrayInputStream(buffer.toArray())));
-                } else {
-                    break;
-                }
+            try {
+                ArrayList<Image> frames = FileUtil.loadFramesFromVideo(video);
+                this.model.setFrames(frames);
+            } catch (Exception e) {
+                // TODO: das hier muss später noch etwas genauer gemacht werden mit unterschiedlichen Exceptions!
+                System.out.println(e);
+                return;
             }
+            System.out.println("Frames set: " + this.model.getFramesAmount());
 
-            // Vorher noch ueberpruefen, ob die Liste nicht vielleicht sogar leer ist!
-            this.model.setFrames(frames);
 
+            /** 4) Initiale Werte setzen */
             try {
                 this.currentFrame.setImage(model.getFrameByIndex(0));
                 this.nextFrame.setImage(model.getFrameByIndex(1));
@@ -249,6 +165,7 @@ public class Controller {
     /**
      *  Handler getLastFrames (wenn Button "< Zurück" gedrueckt)
      *  => das vorherige Frame wird im aktuellen Frame angezeigt und das aktuelle im naechsten!
+     *  => die Labels werden eingezeichnet, ggf nicht gespeicherte (aber veraenderte) Labels abfangen?
      */
     @FXML protected void getLastFrame(ActionEvent event){
         if (this.model.getFramesAmount() == 0) {
@@ -280,6 +197,7 @@ public class Controller {
     /**
      *  Handler getNextFrame (wenn Button "Weiter >" gedrueckt)
      *  => das naechste Frame wird im aktuellen Frame angezeigt und das uebernaechste im naechsten!
+     *  => die Labels werden eingezeichnet, ggf nicht gespeicherte (aber veraenderte) Labels abfangen?
      */
     @FXML protected void getNextFrame(ActionEvent event){
         int amount = this.model.getFramesAmount();

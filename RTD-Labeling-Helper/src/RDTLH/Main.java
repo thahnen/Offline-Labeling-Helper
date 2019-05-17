@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.opencv.core.Core;
 
+
 public class Main extends Application {
 
     @Override
