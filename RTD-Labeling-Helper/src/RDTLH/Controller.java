@@ -2,6 +2,7 @@ package RDTLH;
 
 import RDTLH.data.FrameData;
 import RDTLH.util.FileUtil;
+import RDTLH.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -145,6 +146,7 @@ public class Controller {
 
 
             /** 4) Initiale Werte setzen */
+            // TODO: das hier alles durch die UIUtil-Element ersetzen!
             try {
                 this.currentFrame.setImage(model.getFrameByIndex(0));
                 this.nextFrame.setImage(model.getFrameByIndex(1));

@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/RDTLH/util/FileUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/RDTLH/util/UIUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Model.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/NotFoundException.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RDTLH/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/FrameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/data/FrameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/data/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RDTLH/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RDTLH/data/FrameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/data/FrameData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RDTLH/data/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RDTLH/data/Label.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/RDTLH/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+            <state relative-caret-position="469">
+              <caret line="148" column="70" selection-start-line="148" selection-start-column="70" selection-end-line="148" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#865#866#0" expanded="true" />
@@ -97,11 +93,35 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RDTLH/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="739">
+              <caret line="66" column="100" selection-start-line="66" selection-start-column="100" selection-end-line="66" selection-end-column="100" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/RDTLH/util/UIUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/RDTLH/util/FileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="74" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
+            <state relative-caret-position="330">
+              <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,11 +158,12 @@
         <option value="$PROJECT_DIR$/src/RDTLH/Label.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/FrameData.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/Main.java" />
+        <option value="$PROJECT_DIR$/src/RDTLH/util/FileUtil.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/data/FrameData.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/data/Label.java" />
+        <option value="$PROJECT_DIR$/src/RDTLH/util/UIUtil.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/Model.java" />
         <option value="$PROJECT_DIR$/src/RDTLH/Controller.java" />
-        <option value="$PROJECT_DIR$/src/RDTLH/util/FileUtil.java" />
       </list>
     </option>
   </component>
@@ -181,6 +202,20 @@
               <item name="RTD-Labeling-Helper" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="RDTLH" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RTD-Labeling-Helper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RTD-Labeling-Helper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RDTLH" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RTD-Labeling-Helper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RTD-Labeling-Helper" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="RDTLH" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -316,12 +351,12 @@
       <workItem from="1557743324685" duration="1566000" />
       <workItem from="1557745047798" duration="6527000" />
       <workItem from="1557992994931" duration="702000" />
-      <workItem from="1557993710695" duration="14850000" />
+      <workItem from="1557993710695" duration="20133000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32030000" />
+    <option name="totallyTimeSpent" value="37313000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1922" height="1025" extended-state="6" />
@@ -411,22 +446,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RDTLH/data/Label.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="495">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+          <folding>
+            <element signature="e#389#390#0" expanded="true" />
+            <element signature="e#419#420#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+            <element signature="e#648#649#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RDTLH/util/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="28" column="32" lean-forward="true" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RDTLH/util/UIUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RDTLH/data/FrameData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="210">
+          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RDTLH/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        <state relative-caret-position="739">
+          <caret line="66" column="100" selection-start-line="66" selection-start-column="100" selection-end-line="66" selection-end-column="100" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -435,22 +502,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/RDTLH/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        <state relative-caret-position="469">
+          <caret line="148" column="70" selection-start-line="148" selection-start-column="70" selection-end-line="148" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#865#866#0" expanded="true" />
             <element signature="e#905#906#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RDTLH/util/FileUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="74" selection-start-line="28" selection-start-column="74" selection-end-line="28" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

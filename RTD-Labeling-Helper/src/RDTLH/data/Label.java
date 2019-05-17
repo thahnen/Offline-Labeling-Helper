@@ -14,4 +14,24 @@ public class Label {
         this.p3 = n_p3;
         this.p4 = n_p4;
     }
+
+    public int getLabelId() {
+        return label_id;
+    }
+
+    public Point2D getP1() {
+        return p1;
+    }
+
+    public Point2D getP2() {
+        return p2;
+    }
+
+    public Point2D getP3() {
+        return p3;
+    }
+
+    public Point2D getP4() {
+        return p4;
+    }
 }

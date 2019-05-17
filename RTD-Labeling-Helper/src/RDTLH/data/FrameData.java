@@ -11,4 +11,12 @@ public class FrameData {
         this.frame_nr = n_nr;
         this.found_labels = n_label;
     }
+
+    public int getFrameNr() {
+        return frame_nr;
+    }
+
+    public ArrayList<Label> getLabels() {
+        return found_labels;
+    }
 }
