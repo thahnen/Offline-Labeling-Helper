@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 /***********************************************************************************************************************
  *
- *      INHALT DER KLASS FILEUTIL
- *      =========================
+ *      INHALT DER KLASSE FILEUTIL
+ *      ==========================
  *
  *      Methoden (statisch!):
  *      - loadLabelsFromJSON    =>      laed die Label in Frame-Info-Objekte fuer das Model

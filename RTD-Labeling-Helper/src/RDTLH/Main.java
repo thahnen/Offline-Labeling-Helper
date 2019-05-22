@@ -27,6 +27,7 @@ public class Main extends Application {
             @Override
             public void handle(WindowEvent windowEvent) {
                 // do it, just do it!
+                System.out.println("Wird geschlossen!");
             }
         }));
         primaryStage.show();

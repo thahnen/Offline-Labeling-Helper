@@ -5,9 +5,9 @@ import RDTLH.util.FileUtil;
 import RDTLH.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
@@ -19,8 +19,8 @@ import java.util.List;
 
 /***********************************************************************************************************************
  *
- *      INHALT DER KLASS CONTROLLER
- *      ===========================
+ *      INHALT DER KLASSE CONTROLLER
+ *      ============================
  *
  *      - Alle FXML-Elmente, die es gibt
  *      - Model model, das alle Daten beinhaltet!
@@ -41,8 +41,9 @@ public class Controller {
     @FXML private Button loadBtn;
     @FXML private Button backBtn;
     @FXML private Button nextBtn;
-    @FXML private ImageView currentFrame;
-    @FXML private ImageView nextFrame;
+    @FXML private Canvas lastFrame;
+    @FXML private Canvas currentFrame;
+    @FXML private Canvas nextFrame;
 
     private Model model;
 
@@ -145,17 +146,24 @@ public class Controller {
             System.out.println("Frames set: " + this.model.getFramesAmount());
 
 
-            /** 4) Initiale Werte setzen */
-            // TODO: das hier alles durch die UIUtil-Element ersetzen!
+            /** 4) Initiale Werte (Frames + Label) setzen */
+            this.model.setCurrentFrameId(0);
+
+            FrameData current, next;
             try {
-                this.currentFrame.setImage(model.getFrameByIndex(0));
-                this.nextFrame.setImage(model.getFrameByIndex(1));
-            } catch (Exception e) {
-                System.out.println(e);
-                return;
+                current = this.model.getFrameDataByFrameNr(0);
+            } catch (IndexOutOfBoundsException e) {
+                current = null;
             }
 
-            this.model.setCurrentFrameId(0);
+            try {
+                next = this.model.getFrameDataByFrameNr(1);
+            } catch (IndexOutOfBoundsException e) {
+                next = null;
+            }
+
+            UIUtil.updateCanvas(currentFrame, this.model.getFrameByIndex(0), current);
+            UIUtil.updateCanvas(nextFrame, this.model.getFrameByIndex(1), next);
         } else {
             /**
              *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
@@ -174,23 +182,59 @@ public class Controller {
             return;
         }
 
+
         int id = this.model.getCurrentFrameId();
         // DEBUG:
         System.out.println("Vorher: " + id);
         if (id == 0) {
             // Man kann nicht weiter zurueck gehen, es ist das allererste Frame ausgewaehlt!
+            // => ergo ist das "lastFrame" leer!
             return;
+        } else if (id == 1) {
+            /** Es muss das "lastFrame" noch geloescht werden! */
+            UIUtil.clearCanvas(this.lastFrame);
+
+            FrameData current, next;
+            try {
+                current = this.model.getFrameDataByFrameNr(id-1);
+            } catch (IndexOutOfBoundsException e) {
+                current = null;
+            }
+
+            try {
+                next = this.model.getFrameDataByFrameNr(id);
+            } catch (IndexOutOfBoundsException e) {
+                next = null;
+            }
+
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
+        } else {
+            FrameData last, current, next;
+            try {
+                last = this.model.getFrameDataByFrameNr(id-2);
+            } catch (IndexOutOfBoundsException e) {
+                last = null;
+            }
+
+            try {
+                current = this.model.getFrameDataByFrameNr(id-1);
+            } catch (IndexOutOfBoundsException e) {
+                current = null;
+            }
+
+            try {
+                next = this.model.getFrameDataByFrameNr(id);
+            } catch (IndexOutOfBoundsException e) {
+                next = null;
+            }
+
+            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id-2), last);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
         }
 
-        try {
-            this.nextFrame.setImage(model.getFrameByIndex(id));
-            this.currentFrame.setImage(model.getFrameByIndex(--id));
-        } catch (Exception e) {
-            System.out.println(e);
-            return;
-        }
-
-        this.model.setCurrentFrameId(id);
+        this.model.setCurrentFrameId(--id);
         // DEBUG:
         System.out.println("Nachher: " + id);
     }
@@ -207,31 +251,58 @@ public class Controller {
             return;
         }
 
+
         int id = this.model.getCurrentFrameId();
         // DEBUG:
-        System.out.println("Vorher: " + id);
+        System.out.println("Vorher: " + id + ", " + amount);
         if (id == amount-1) {
             // Man kann nicht weiter vorwaerts gehen, es ist das allerletzte Frame ausgewaehlt!
             return;
         } else if (id == amount-2) {
-            this.nextFrame.setImage(null);
-        } else {
+            /** Es muss das "nextFrame" noch geloescht werden! */
+            UIUtil.clearCanvas(this.nextFrame);
+
+            FrameData last, current;
             try {
-                this.nextFrame.setImage(model.getFrameByIndex(id+2));
-            } catch (Exception e) {
-                System.out.println(e);
-                return;
+                last = this.model.getFrameDataByFrameNr(id);
+            } catch (IndexOutOfBoundsException e) {
+                last = null;
             }
+
+            try {
+                current = this.model.getFrameDataByFrameNr(id+1);
+            } catch (IndexOutOfBoundsException e) {
+                current = null;
+            }
+
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id), last);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+1), current);
+        } else {
+            FrameData last, current, next;
+            try {
+                last = this.model.getFrameDataByFrameNr(id);
+            } catch (IndexOutOfBoundsException e) {
+                last = null;
+            }
+
+            try {
+                current = this.model.getFrameDataByFrameNr(id+1);
+            } catch (IndexOutOfBoundsException e) {
+                current = null;
+            }
+
+            try {
+                next = this.model.getFrameDataByFrameNr(id+2);
+            } catch (IndexOutOfBoundsException e) {
+                next = null;
+            }
+
+            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+2), next);
         }
 
-        try {
-            this.currentFrame.setImage(model.getFrameByIndex(++id));
-        } catch (Exception e) {
-            System.out.println(e);
-            return;
-        }
-
-        this.model.setCurrentFrameId(id);
+        this.model.setCurrentFrameId(++id);
         // DEBUG:
         System.out.println("Nachher: " + id);
     }
@@ -239,7 +310,7 @@ public class Controller {
 
     /*******************************************************************************************************************
      *
-     *      TODO: JEDEM FXML-ELMENT einen Handler hinzufuegen, wenn irgendein Button gedrueckt wurde!
+     *      TODO: JEDEM FXML-ELMENT einen gemeinsamen Handler hinzufuegen, wenn irgendein Button gedrueckt wurde!
      *
      *******************************************************************************************************************/
     @FXML protected void backBtnHandleKeyPressed(KeyEvent event) {
