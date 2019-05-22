@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.io.*;
@@ -39,11 +41,13 @@ import java.util.List;
 
 public class Controller {
     @FXML private Button loadBtn;
+    @FXML private Button saveLabelBtn;
     @FXML private Button backBtn;
     @FXML private Button nextBtn;
     @FXML private Canvas lastFrame;
     @FXML private Canvas currentFrame;
     @FXML private Canvas nextFrame;
+    @FXML private TextField txtLabelId;
 
     private Model model;
 
@@ -246,6 +250,8 @@ public class Controller {
      *  => die Labels werden eingezeichnet, ggf nicht gespeicherte (aber veraenderte) Labels abfangen?
      */
     @FXML protected void getNextFrame(ActionEvent event){
+        //System.out.println("Was war es fuer ein Event?: " + event.getEventType());
+
         int amount = this.model.getFramesAmount();
         if (amount == 0) {
             return;
@@ -329,4 +335,21 @@ public class Controller {
     }
 
     // TODO: noch einen EventHandler fur den "Video laden" Button!
+
+
+    /**
+     *
+     */
+    @FXML protected void currentFrameHandleMouseClicked(MouseEvent event) {
+        double x = event.getX();
+        double y = event.getY();
+    }
+
+
+    /**
+     *
+     */
+    @FXML protected void saveLabel(ActionEvent event) {
+
+    }
 }

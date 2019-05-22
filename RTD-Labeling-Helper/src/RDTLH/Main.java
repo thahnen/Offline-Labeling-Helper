@@ -17,6 +17,7 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader((getClass().getResource("res/UI.fxml")));
         Controller controller = loader.getController();
         Scene scene = new Scene((Pane) loader.load());
+        scene.getStylesheets().add(getClass().getResource("res/UI.css").toExternalForm());
         primaryStage.setScene(scene);
 
         // Titel setzen
