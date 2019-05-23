@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="frameWindow" maxHeight="1000.0" maxWidth="1840.0" minHeight="1000.0" minWidth="1840.0" prefHeight="1000.0" prefWidth="1840.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RDTLH.Controller">
+<Pane fx:id="frameWindow" maxHeight="1000.0" maxWidth="1840.0" minHeight="1000.0" minWidth="1840.0" prefHeight="1000.0" prefWidth="1840.0" stylesheets="@UI.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="RDTLH.Controller">
    <children>
-      <Button fx:id="backBtn" layoutX="790.0" layoutY="950.0" mnemonicParsing="false" onAction="#getLastFrame" onKeyPressed="#backBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="&lt; Zurück">
+      <Button fx:id="backBtn" disable="true" layoutX="790.0" layoutY="950.0" mnemonicParsing="false" onAction="#getLastFrame" onKeyPressed="#backBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="&lt; Zurück">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="nextBtn" layoutX="930.0" layoutY="950.0" mnemonicParsing="false" onAction="#getNextFrame" onKeyPressed="#nextBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="Weiter &gt;">
+      <Button fx:id="nextBtn" disable="true" layoutX="930.0" layoutY="950.0" mnemonicParsing="false" onAction="#getNextFrame" onKeyPressed="#nextBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="Weiter &gt;">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="loadBtn" layoutX="860.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVideo" prefHeight="35.0" prefWidth="120.0" text="Video laden">
+      <Button fx:id="loadBtn" layoutX="860.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVideo" onKeyPressed="#loadBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="Video laden">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Canvas fx:id="currentFrame" height="427.0" layoutX="664.0" layoutY="150.0" onMouseClicked="#currentFrameHandleMouseClicked" width="512.0" />
+      <Canvas fx:id="currentFrame" disable="true" height="427.0" layoutX="664.0" layoutY="150.0" onMouseClicked="#currentFrameHandleMouseClicked" width="512.0" />
       <Canvas fx:id="lastFrame" height="427.0" layoutX="138.0" layoutY="150.0" width="512.0" />
       <Canvas fx:id="nextFrame" height="427.0" layoutX="1190.0" layoutY="150.0" width="512.0" />
       <Label layoutX="830.0" layoutY="600.0" prefHeight="25.0" prefWidth="180.0" text="Ausgewähltes Label" underline="true">
@@ -37,8 +37,8 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLabelId" layoutX="930.0" layoutY="640.0" prefHeight="25.0" prefWidth="90.0" />
-      <Button fx:id="saveLabelBtn" layoutX="830.0" layoutY="680.0" mnemonicParsing="false" onAction="#saveLabel" prefHeight="35.0" prefWidth="180.0" text="Label Speichern">
+      <TextField fx:id="txtLabelId" disable="true" layoutX="930.0" layoutY="640.0" prefHeight="25.0" prefWidth="90.0" />
+      <Button fx:id="saveLabelBtn" disable="true" layoutX="830.0" layoutY="680.0" mnemonicParsing="false" onAction="#saveLabel" onKeyPressed="#saveLabelBtnHandleKeyPressed" prefHeight="35.0" prefWidth="180.0" text="Label Speichern">
          <font>
             <Font size="18.0" />
          </font>

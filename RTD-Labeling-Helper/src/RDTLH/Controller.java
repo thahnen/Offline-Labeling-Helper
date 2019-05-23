@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -26,6 +27,7 @@ import java.util.List;
  *
  *      - Alle FXML-Elmente, die es gibt
  *      - Model model, das alle Daten beinhaltet!
+ *      - UIUtil uiutil, das Veränderungen in der UI handhabt!
  *
  *      Handler (Buttons):
  *      - loadVideo         =>      laed ein Video(/Frames) und Label ein
@@ -50,10 +52,12 @@ public class Controller {
     @FXML private TextField txtLabelId;
 
     private Model model;
+    private UIUtil uiutil;
 
 
     public Controller() {
         this.model = new Model();
+        this.uiutil = new UIUtil();
     }
 
 
@@ -158,16 +162,26 @@ public class Controller {
                 current = this.model.getFrameDataByFrameNr(0);
             } catch (IndexOutOfBoundsException e) {
                 current = null;
+                System.out.println("Init: current is null!");
             }
 
             try {
                 next = this.model.getFrameDataByFrameNr(1);
             } catch (IndexOutOfBoundsException e) {
                 next = null;
+                System.out.println("Init: next is null!");
             }
 
-            UIUtil.updateCanvas(currentFrame, this.model.getFrameByIndex(0), current);
-            UIUtil.updateCanvas(nextFrame, this.model.getFrameByIndex(1), next);
+            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(0), current);
+            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(1), next);
+
+
+            /** 5) Alle UI-Elemente aktivieren, die deaktiviert waren */
+            this.currentFrame.setDisable(false);
+            this.txtLabelId.setDisable(false);
+            this.saveLabelBtn.setDisable(false);
+            this.backBtn.setDisable(false);
+            this.nextBtn.setDisable(false);
         } else {
             /**
              *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
@@ -180,6 +194,7 @@ public class Controller {
      *  Handler getLastFrames (wenn Button "< Zurück" gedrueckt)
      *  => das vorherige Frame wird im aktuellen Frame angezeigt und das aktuelle im naechsten!
      *  => die Labels werden eingezeichnet, ggf nicht gespeicherte (aber veraenderte) Labels abfangen?
+     *  TODO: bei den ersten (beiden) Frames kommt es zu irgendwelchen Dopplungen! -> manchmal!
      */
     @FXML protected void getLastFrame(ActionEvent event){
         if (this.model.getFramesAmount() == 0) {
@@ -196,7 +211,7 @@ public class Controller {
             return;
         } else if (id == 1) {
             /** Es muss das "lastFrame" noch geloescht werden! */
-            UIUtil.clearCanvas(this.lastFrame);
+            this.uiutil.clearCanvas(this.lastFrame);
 
             FrameData current, next;
             try {
@@ -211,8 +226,8 @@ public class Controller {
                 next = null;
             }
 
-            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
-            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
+            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
         } else {
             FrameData last, current, next;
             try {
@@ -233,9 +248,9 @@ public class Controller {
                 next = null;
             }
 
-            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id-2), last);
-            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
-            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
+            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id-2), last);
+            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
         }
 
         this.model.setCurrentFrameId(--id);
@@ -248,10 +263,9 @@ public class Controller {
      *  Handler getNextFrame (wenn Button "Weiter >" gedrueckt)
      *  => das naechste Frame wird im aktuellen Frame angezeigt und das uebernaechste im naechsten!
      *  => die Labels werden eingezeichnet, ggf nicht gespeicherte (aber veraenderte) Labels abfangen?
+     *  TODO: bei den letzten (beiden) Frames kommt es zu irgendwelchen Dopplungen! -> manchmal!
      */
     @FXML protected void getNextFrame(ActionEvent event){
-        //System.out.println("Was war es fuer ein Event?: " + event.getEventType());
-
         int amount = this.model.getFramesAmount();
         if (amount == 0) {
             return;
@@ -266,7 +280,7 @@ public class Controller {
             return;
         } else if (id == amount-2) {
             /** Es muss das "nextFrame" noch geloescht werden! */
-            UIUtil.clearCanvas(this.nextFrame);
+            this.uiutil.clearCanvas(this.nextFrame);
 
             FrameData last, current;
             try {
@@ -281,8 +295,8 @@ public class Controller {
                 current = null;
             }
 
-            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id), last);
-            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+1), current);
+            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
+            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
         } else {
             FrameData last, current, next;
             try {
@@ -303,9 +317,9 @@ public class Controller {
                 next = null;
             }
 
-            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
-            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
-            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+2), next);
+            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
+            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
+            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+2), next);
         }
 
         this.model.setCurrentFrameId(++id);
@@ -314,35 +328,97 @@ public class Controller {
     }
 
 
-    /*******************************************************************************************************************
+    /**
+     *  EventHandler, der ausgeführt wird, wenn, während der der "Zurück"-Button fokussiert, eine Taste gedrückt wurde
      *
-     *      TODO: JEDEM FXML-ELMENT einen gemeinsamen Handler hinzufuegen, wenn irgendein Button gedrueckt wurde!
-     *
-     *******************************************************************************************************************/
+     *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
+     */
     @FXML protected void backBtnHandleKeyPressed(KeyEvent event) {
-        // Hier ueberpruefen, wo der Fokus liegt und ob Enter gedrueckt wurde!
-        // => dann muss der Fokus ggf umgesetzt werden und bei Enter soll doppelte Aktion verhindert werden!
-        System.out.println(event.getCode());
-        this.getLastFrame(null);
+        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        KeyCode pressed = event.getCode();
+        if (pressed != KeyCode.ENTER) {
+            this.handleKeyPressed(pressed);
+        }
     }
 
 
+    /**
+     *  EventHandler, der ausgeführt wird, wenn, während der der "Weiter"-Button fokussiert, eine Taste gedrückt wurde
+     *
+     *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
+     */
     @FXML protected void nextBtnHandleKeyPressed(KeyEvent event) {
-        // Hier ueberpruefen, wo der Fokus liegt und ob Enter gedrueckt wurde!
-        // => dann muss der Fokus ggf umgesetzt werden und bei Enter soll doppelte Aktion verhindert werden!
-        System.out.println(event.getCode());
-        this.getNextFrame(null);
+        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        KeyCode pressed = event.getCode();
+        if (pressed != KeyCode.ENTER) {
+            this.handleKeyPressed(pressed);
+        }
     }
 
-    // TODO: noch einen EventHandler fur den "Video laden" Button!
+
+    /**
+     *  EventHandler, der ausgeführt wird, wenn, während der der "Video laden"-Button fokussiert, eine Taste gedrückt wurde
+     *
+     *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
+     */
+    @FXML protected void loadBtnHandleKeyPressed(KeyEvent event) {
+        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        KeyCode pressed = event.getCode();
+        if (pressed != KeyCode.ENTER) {
+            this.handleKeyPressed(pressed);
+        }
+    }
+
+
+    /**
+     *  EventHandler, der ausgeführt wird, wenn, während der der "Label Speichern"-Button fokussiert, eine Taste gedrückt wurde
+     *
+     *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
+     */
+    @FXML protected void saveLabelBtnHandleKeyPressed(KeyEvent event) {
+        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        KeyCode pressed = event.getCode();
+        if (pressed != KeyCode.ENTER) {
+            this.handleKeyPressed(pressed);
+        }
+    }
+
+
+    /**
+     *  Verarbeitet den KeyCode, da die Abarbeitung für (fast) alle Tasten gleich sein soll!
+     *
+     *  @param code         Der KeyCode des Events, wird weiterverarbeitet!
+     */
+    private void handleKeyPressed(KeyCode code) {
+        if (code == KeyCode.RIGHT) {
+            if (!this.nextBtn.isFocused()) this.nextBtn.requestFocus();
+            this.getNextFrame(null);
+        } else if (code == KeyCode.LEFT) {
+            if (!this.backBtn.isFocused()) this.backBtn.requestFocus();
+            this.getLastFrame(null);
+        } /* else if (...) ... */
+    }
 
 
     /**
      *
      */
     @FXML protected void currentFrameHandleMouseClicked(MouseEvent event) {
+        if (this.currentFrame.isDisabled()) return;
+
         double x = event.getX();
         double y = event.getY();
+
+        System.out.println("Coords: " + x + " " + y);
+
+        // TODO: die Label-Id zurückgeben lassen, in das geklickt wurde!
+        int label_id;
+        try {
+            label_id = this.uiutil.getClickedLabelId(this.currentFrame, x, y, this.model.getFrameDataByFrameNr(this.model.getCurrentFrameId()));
+            this.txtLabelId.setText(label_id+"");
+        } catch (Exception e) {
+            this.txtLabelId.setText("");
+        }
     }
 
 

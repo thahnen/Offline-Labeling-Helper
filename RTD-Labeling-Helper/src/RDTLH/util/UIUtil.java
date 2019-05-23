@@ -15,6 +15,8 @@ import java.util.ArrayList;
  *      INHALT DER KLASSE UIUITIL
  *      =========================
  *
+ *      - Alle FXML-Elemente, die bearbeitet werden können
+ *
  *      Mehtoden (statisch):
  *      - updateCanvas          =>      updatet ein bestimmtes Canvas mit den jeweils angegebenen Daten
  *
@@ -22,14 +24,18 @@ import java.util.ArrayList;
 
 
 public final class UIUtil {
+
+    public UIUtil() {}
+
+
     /**
      *  Updatet das jeweils angegebene Canvas mit einem Bild und den Labeln!
      *
-     *  @param view         Das Canvas, welches geupdatet werden soll
+     *  @param view         Das zu ändernde Canvas (muss mit angegeben werden, kann nicht an die Klasse weitergegeben werden!)
      *  @param image        Das anzuzeigende Frame
      *  @param data         Die Frame-Daten zum jeweiligen Frame, daraus werden die Labels extrahiert!
      */
-    public static void updateCanvas(Canvas view, Image image, FrameData data) {
+    public void updateCanvas(Canvas view, Image image, FrameData data) {
         final GraphicsContext gc = view.getGraphicsContext2D();
 
         /** 1) Set the ImageView to the new Image */
@@ -66,12 +72,36 @@ public final class UIUtil {
     /**
      *  Loescht den Inhalt des angegebenen Canvas
      *
-     *  @param view         Das Canvas, dessen Inhalt geloescht werden soll!
+     *  @param view         Das Canvas, dessen Inhalt geloescht werden soll (muss mit angegeben werden, kann nicht an die Klasse weitergegeben werden!)
      *
      *  TODO: kann zu einem Einzeiler gemacht werden!
      */
-    public static void clearCanvas(Canvas view) {
+    public void clearCanvas(Canvas view) {
         final GraphicsContext gc = view.getGraphicsContext2D();
         gc.clearRect(0, 0, view.getWidth(), view.getHeight());
+    }
+
+
+    /**
+     *  Gibt die Label-Id des Labels zurück, in das geklickt wurde. Falls in gar keins geklickt wurde gibt es eine Exception!
+     *
+     *  @param view         Das Canvas, welches aus dem das Label extrahiert werden soll (muss mit angegeben werden, kann nicht an die Klasse weitergegeben werden!)
+     *  @param x            Die X-Koordinate des Klick-Events
+     *  @param y            Die Y-Koordinate des Klick-Events
+     *  @param data         Die Frame-Daten zum jeweiligen Frame, um daraus alle vorhandenen Labels abzufragen!
+     *  @throws NoSuchFieldException
+     */
+    public int getClickedLabelId(Canvas view, double x, double y, FrameData data) throws NoSuchFieldException {
+        double scaleX = view.getWidth()/768;
+        double scaleY = view.getHeight()/640;
+
+        // TODO: gibt allerdings nur das allererste Label aus, auf das geklickt wurde! es können sich ja auch zwei ueberlappen!
+        for (Label l : data.getLabels()) {
+            if (x >= (l.getP1().getX())*scaleX && x <= (l.getP3().getX())*scaleX        // x in [P1.x, P3.x]
+                && y >= (l.getP1().getY())*scaleY && y <= (l.getP3().getY())*scaleY) {  // y in [P1.y, P3.y]
+                return l.getLabelId();
+            }
+        }
+        throw new NoSuchFieldException("No Label was clicked!");
     }
 }

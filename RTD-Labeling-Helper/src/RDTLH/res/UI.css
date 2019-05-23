@@ -5,6 +5,18 @@
  ***********************************************************************************************************************/
 
 
+/*
+    The style of every Canvas to distinguish it from the background (which is white)
+    TODO: does not work yet!
+*/
+Canvas {
+    -fx-background-color: green;
+}
+
+TextField {
+    -fx-background-color: green;
+}
+
 /* The style of every rectangle for a label in a frame! */
 .frame_rect {
     -fx-border-color: green;
