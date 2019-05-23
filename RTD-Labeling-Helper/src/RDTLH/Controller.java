@@ -6,8 +6,7 @@ import RDTLH.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
@@ -18,6 +17,7 @@ import javafx.stage.FileChooser;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /***********************************************************************************************************************
@@ -54,10 +54,13 @@ public class Controller {
     private Model model;
     private UIUtil uiutil;
 
+    private int currentSelectedLabelId;
+
 
     public Controller() {
         this.model = new Model();
         this.uiutil = new UIUtil();
+        this.currentSelectedLabelId = -1;
     }
 
 
@@ -177,9 +180,8 @@ public class Controller {
 
 
             /** 5) Alle UI-Elemente aktivieren, die deaktiviert waren */
+            this.loadBtn.setDisable(true);          // bis anständig geregelt ist, was passiert, wenn man neuläd!
             this.currentFrame.setDisable(false);
-            this.txtLabelId.setDisable(false);
-            this.saveLabelBtn.setDisable(false);
             this.backBtn.setDisable(false);
             this.nextBtn.setDisable(false);
         } else {
@@ -200,6 +202,9 @@ public class Controller {
         if (this.model.getFramesAmount() == 0) {
             return;
         }
+
+
+        // TODO: überprüfen, ob ein Label ausgewählt ist und fragen oder aber Inhalt löschen und mit Button disabeln!
 
 
         int id = this.model.getCurrentFrameId();
@@ -270,6 +275,9 @@ public class Controller {
         if (amount == 0) {
             return;
         }
+
+
+        // TODO: überprüfen, ob ein Label ausgewählt ist und fragen oder aber Inhalt löschen und mit Button disabeln!
 
 
         int id = this.model.getCurrentFrameId();
@@ -390,10 +398,10 @@ public class Controller {
      *  @param code         Der KeyCode des Events, wird weiterverarbeitet!
      */
     private void handleKeyPressed(KeyCode code) {
-        if (code == KeyCode.RIGHT) {
+        if (code == KeyCode.RIGHT && !this.nextBtn.isDisabled()) {
             if (!this.nextBtn.isFocused()) this.nextBtn.requestFocus();
             this.getNextFrame(null);
-        } else if (code == KeyCode.LEFT) {
+        } else if (code == KeyCode.LEFT && !this.backBtn.isDisabled()) {
             if (!this.backBtn.isFocused()) this.backBtn.requestFocus();
             this.getLastFrame(null);
         } /* else if (...) ... */
@@ -401,7 +409,9 @@ public class Controller {
 
 
     /**
+     *  Verarbeitet den Klick in das currentFrame-Canvas
      *
+     *  @param event        Wird eigentlich nicht verwendet!
      */
     @FXML protected void currentFrameHandleMouseClicked(MouseEvent event) {
         if (this.currentFrame.isDisabled()) return;
@@ -409,23 +419,66 @@ public class Controller {
         double x = event.getX();
         double y = event.getY();
 
-        System.out.println("Coords: " + x + " " + y);
-
-        // TODO: die Label-Id zurückgeben lassen, in das geklickt wurde!
         int label_id;
         try {
             label_id = this.uiutil.getClickedLabelId(this.currentFrame, x, y, this.model.getFrameDataByFrameNr(this.model.getCurrentFrameId()));
+
+            // Das TextField und den Button freigeben!
+            this.txtLabelId.setDisable(false);
+            this.saveLabelBtn.setDisable(false);
+
             this.txtLabelId.setText(label_id+"");
+            this.currentSelectedLabelId = label_id;
         } catch (Exception e) {
+            // Das TextField und den Button sperren!
+            this.txtLabelId.setDisable(true);
+            this.saveLabelBtn.setDisable(true);
+
             this.txtLabelId.setText("");
+            this.currentSelectedLabelId = -1;
         }
     }
 
 
     /**
+     *  EventHandler, der ausgeführt wird, wenn der Button "Label speichern" gedrückt wurde!
      *
+     *  @param event
+     *
+     *  TODO: abfragen, ob nur in diesem Frame das Label geändert werden soll oder in allen!
+     *  TODO: wenn in allen geändert werden soll, kann es vorkommen, dass mehrere Label die gleiche Id haben!
      */
     @FXML protected void saveLabel(ActionEvent event) {
+        if (this.currentSelectedLabelId == -1) return;
 
+        int n_label_id;
+        try {
+            n_label_id = Integer.parseInt(this.txtLabelId.getText());
+        } catch (Exception e) {
+            /** Fehlerbehandlung, weil der Inhalt keine Zahl ist! */
+            System.out.println("Es wurde keine Zahl als neue Label-Id eingegeben!");
+            return;
+        }
+
+
+        /** Dient erstmal nur zum Test! */
+        /** TODO: das in schön verpacken und auslagern! */
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Dieses Frame nur oder alle?");
+        alert.setHeaderText("Soll das Label nur in diesem Frame oder in allen geändert werden?");
+
+        ButtonType eins = new ButtonType("Nur hier");
+        ButtonType alle = new ButtonType("Überall");
+        ButtonType cancel = new ButtonType("Abbrechen", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(eins, alle, cancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == eins) {
+            // Im Model nur zu genau diesem Frame das Label ändern!
+        } else if (result.get() == alle) {
+            // Im Model durch alle Frames iterieren und die Label ändern!
+        } else {
+            // Es wurde abgebrochen!
+        }
     }
 }
