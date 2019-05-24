@@ -1,7 +1,7 @@
-package RDTLH;
+package com.thahnen.RDTLH;
 
-import RDTLH.data.FrameData;
-import RDTLH.data.Label;
+import com.thahnen.RDTLH.data.FrameData;
+import com.thahnen.RDTLH.data.Label;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
 

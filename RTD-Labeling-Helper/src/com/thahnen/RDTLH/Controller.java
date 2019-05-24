@@ -1,8 +1,8 @@
-package RDTLH;
+package com.thahnen.RDTLH;
 
-import RDTLH.data.FrameData;
-import RDTLH.util.FileUtil;
-import RDTLH.util.UIUtil;
+import com.thahnen.RDTLH.data.FrameData;
+import com.thahnen.RDTLH.util.FileUtil;
+import com.thahnen.RDTLH.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
@@ -17,7 +17,6 @@ import javafx.stage.FileChooser;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 /***********************************************************************************************************************

@@ -1,4 +1,4 @@
-package RDTLH.data;
+package com.thahnen.RDTLH.data;
 
 import java.util.ArrayList;
 

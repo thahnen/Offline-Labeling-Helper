@@ -1,4 +1,4 @@
-package RDTLH;
+package com.thahnen.RDTLH;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;

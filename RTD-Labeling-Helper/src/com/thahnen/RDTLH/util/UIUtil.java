@@ -1,8 +1,8 @@
-package RDTLH.util;
+package com.thahnen.RDTLH.util;
 
 
-import RDTLH.data.FrameData;
-import RDTLH.data.Label;
+import com.thahnen.RDTLH.data.FrameData;
+import com.thahnen.RDTLH.data.Label;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RTD-Labeling-Helper.iml" filepath="$PROJECT_DIR$/RTD-Labeling-Helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RTDLH.iml" filepath="$PROJECT_DIR$/RTDLH.iml" />
     </modules>
   </component>
 </project>

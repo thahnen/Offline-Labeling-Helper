@@ -1,4 +1,4 @@
-package RDTLH.data;
+package com.thahnen.RDTLH.data;
 
 import javafx.geometry.Point2D;
 
