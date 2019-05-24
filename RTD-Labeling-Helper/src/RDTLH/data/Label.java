@@ -3,6 +3,20 @@ package RDTLH.data;
 import javafx.geometry.Point2D;
 
 
+/***********************************************************************************************************************
+ *
+ *      INHALT DER KLASSE Label
+ *      =======================
+ *
+ *      => dient nur als Datenspeicher und bietet (soweit) keine komplexen Funktionen an (quasi wie ein struct in C)
+ *
+ *      - int label_id              die eingelesene, vergebene Label-Id, kann verändert werden
+ *      - Point p1, p2, p3, p4      die Eckepunkte der Bounding-Box
+ *                                  TODO: sollen auch irgendwann veränderbar sein!
+ *
+ ***********************************************************************************************************************/
+
+
 public class Label {
     private int label_id;
     private Point2D p1, p2, p3, p4;
@@ -17,6 +31,9 @@ public class Label {
 
     public int getLabelId() {
         return label_id;
+    }
+    public void setLabelId(int n_label_id) {
+        this.label_id = n_label_id;
     }
 
     public Point2D getP1() {

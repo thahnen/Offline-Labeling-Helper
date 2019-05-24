@@ -3,6 +3,20 @@ package RDTLH.data;
 import java.util.ArrayList;
 
 
+/***********************************************************************************************************************
+ *
+ *      INHALT DER KLASSE FrameData
+ *      ===========================
+ *
+ *      => dient nur als Datenspeicher und bietet (soweit) keine komplexen Funktionen an (quasi wie ein struct in C)
+ *
+ *      - int frame_nr              die eingelesene, Frame-Nr, die angibt, zu welchem Frame (des Videos) die Label gehören
+ *      - Label[] found_labels      die gefundenen Labels in diesem Frame, können nur einzeln verändert werden!
+ *                                  TODO: irgendwann soll man neue hinzufügen, alte verändern oder löschen können!
+ *
+ ***********************************************************************************************************************/
+
+
 public class FrameData {
     int frame_nr;
     ArrayList<Label> found_labels;

@@ -5,9 +5,13 @@ import RDTLH.data.FrameData;
 import RDTLH.data.Label;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 /***********************************************************************************************************************
@@ -15,10 +19,15 @@ import java.util.ArrayList;
  *      INHALT DER KLASSE UIUITIL
  *      =========================
  *
- *      - Alle FXML-Elemente, die bearbeitet werden können
+ *      => beinhaltet (übersichtshalber) alle Funktionen zum Ver-/Bearbeiten der UI-Elemente
  *
- *      Mehtoden (statisch):
- *      - updateCanvas          =>      updatet ein bestimmtes Canvas mit den jeweils angegebenen Daten
+ *      Funtktionen:
+ *      - updateCanvas          =>      updatet ein bestimmtes Canvas mit den jeweils angegebenen Daten (Bild + Frame-Daten)
+ *      - clearCanvas           =>      loescht den Inhalt des angegebenen Canvas
+ *      - getClickedLabelId     =>      gibt die Label-Id von dem Label zurück, auf das im Canvas geklickt wurde
+ *                                      TODO: ggf keine Fehler zurückgeben oder so
+ *
+ *      TODO: ggf doch alle Funktionen statisch machen (ausser die Klasse muss irgendwelche Infos speichern)
  *
  ***********************************************************************************************************************/
 
@@ -103,5 +112,26 @@ public final class UIUtil {
             }
         }
         throw new NoSuchFieldException("No Label was clicked!");
+    }
+
+
+    public int dialogSaveLabel() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Dieses Frame nur oder alle?");
+        alert.setHeaderText("Soll das Label nur in diesem Frame oder in allen geändert werden?");
+
+        ButtonType eins = new ButtonType("Nur hier");
+        ButtonType alle = new ButtonType("Überall");
+        ButtonType cancel = new ButtonType("Abbrechen", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(eins, alle, cancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == eins) {
+            return 1;
+        } else if (result.get() == alle) {
+            return 2;
+        } else {
+            return -1;
+        }
     }
 }

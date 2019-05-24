@@ -25,18 +25,20 @@ import java.util.Optional;
  *      INHALT DER KLASSE CONTROLLER
  *      ============================
  *
+ *      => der Controller, der an die GUI gebunden ist und alle Aktionen verarbeitet!
+ *
  *      - Alle FXML-Elmente, die es gibt
  *      - Model model, das alle Daten beinhaltet!
  *      - UIUtil uiutil, das Veränderungen in der UI handhabt!
  *
  *      Handler (Buttons):
- *      - loadVideo         =>      laed ein Video(/Frames) und Label ein
- *      - getLastFrame      =>      setzt die ImageView's neu
- *      - getNextFrame      =>      setzt die ImageView's neu
- *      - handleBtnPress    =>      handhabt die Steuerung per Tastendruck      => TODO: fehlt noch
+ *      - loadVideo             =>      laed ein Video(/Frames) und Label ein
+ *      - getLastFrame          =>      setzt die ImageView's neu
+ *      - getNextFrame          =>      setzt die ImageView's neu
+ *      - handleBtnPress        =>      handhabt die Steuerung per Tastendruck      => TODO: fehlt noch
  *
  *      Handler (ImageView):
- *      - handleMouseClick  =>      handhabt das Auswaehlen von einzelnen Labels
+ *      - handleMouseClick      =>      handhabt das Auswaehlen von einzelnen Labels
  *
  ***********************************************************************************************************************/
 
@@ -91,23 +93,21 @@ public class Controller {
 
         List<File> dateien = chooser.showOpenMultipleDialog(((Node) event.getSource()).getScene().getWindow());
         if (dateien != null) {
-            /** 1) Dateien auf Richtigkeit ueberpruefen */
-            // 1) Es muessen genau 2 Dateien sein!
-            // 2) Eine der Dateien muss ein Video sein, das andere eine JSON-Datei
+            // 1) Dateien auf Richtigkeit ueberpruefen
             if (dateien.size() != 2) {
-                /**
+                /*
                  *  FEHLERBEHANDLUNG: ANZAHL DATEIEN != 2
                  */
                 System.out.println("Es wurden nicht genau zwei Dateien ausgewaehlt!");
                 return;
             } else if (!(dateien.get(0).getName().endsWith(".json") || dateien.get(1).getName().endsWith(".json"))) {
-                /**
+                /*
                  *  FEHLERBEHANDLUNG: KEINE JSON-DATEI AUSGEWAEHLT
                  */
                 System.out.println("Es wurde keine JSON-Datei mit ausgewaehlt!");
                 return;
             } else if (!(dateien.get(0).getName().endsWith(".avi") || dateien.get(1).getName().endsWith(".avi"))) {
-                /**
+                /*
                  *  FEHLERBEHANDLUNG: KEINE AVI-VIDEO-DATEI AUSGEWAEHLT
                  */
                 System.out.println("Es wurde keien AVI-Datei mit ausgewaehlt!");
@@ -125,7 +125,7 @@ public class Controller {
             }
 
 
-            /** 2) Labels als FrameData einlesen! */
+            // 2) Labels als FrameData einlesen!
             try {
                 ArrayList<FrameData> frame_info = FileUtil.loadLabelsFromJSON(label);
                 this.model.setFrameInfo(frame_info);
@@ -137,7 +137,7 @@ public class Controller {
             System.out.println("FrameData set: " + this.model.getFrameInfo().size());
 
 
-            /** 3) Video(-Frames) einlesen */
+            // 3) Video(-Frames) einlesen
             // Nur Videos unter 50mb nehmen!
             System.out.println("Videogroesse: " + (video.length() / (1024*1024)) + "mb");
             if ((video.length() / (1024*1024)) > 50) {
@@ -157,7 +157,7 @@ public class Controller {
             System.out.println("Frames set: " + this.model.getFramesAmount());
 
 
-            /** 4) Initiale Werte (Frames + Label) setzen */
+            // 4) Initiale Werte (Frames + Label) setzen
             this.model.setCurrentFrameId(0);
 
             FrameData current, next;
@@ -179,13 +179,13 @@ public class Controller {
             this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(1), next);
 
 
-            /** 5) Alle UI-Elemente aktivieren, die deaktiviert waren */
+            // 5) Alle UI-Elemente aktivieren, die deaktiviert waren
             this.loadBtn.setDisable(true);          // bis anständig geregelt ist, was passiert, wenn man neuläd!
             this.currentFrame.setDisable(false);
             this.backBtn.setDisable(false);
             this.nextBtn.setDisable(false);
         } else {
-            /**
+            /*
              *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
              */
         }
@@ -209,13 +209,13 @@ public class Controller {
 
         int id = this.model.getCurrentFrameId();
         // DEBUG:
-        System.out.println("Vorher: " + id);
+        //System.out.println("Vorher: " + id);
         if (id == 0) {
             // Man kann nicht weiter zurueck gehen, es ist das allererste Frame ausgewaehlt!
             // => ergo ist das "lastFrame" leer!
             return;
         } else if (id == 1) {
-            /** Es muss das "lastFrame" noch geloescht werden! */
+            // Es muss das "lastFrame" noch geloescht werden!
             this.uiutil.clearCanvas(this.lastFrame);
 
             FrameData current, next;
@@ -260,7 +260,7 @@ public class Controller {
 
         this.model.setCurrentFrameId(--id);
         // DEBUG:
-        System.out.println("Nachher: " + id);
+        //System.out.println("Nachher: " + id);
     }
 
 
@@ -282,12 +282,12 @@ public class Controller {
 
         int id = this.model.getCurrentFrameId();
         // DEBUG:
-        System.out.println("Vorher: " + id + ", " + amount);
+        //System.out.println("Vorher: " + id + ", " + amount);
         if (id == amount-1) {
             // Man kann nicht weiter vorwaerts gehen, es ist das allerletzte Frame ausgewaehlt!
             return;
         } else if (id == amount-2) {
-            /** Es muss das "nextFrame" noch geloescht werden! */
+            // Es muss das "nextFrame" noch geloescht werden!
             this.uiutil.clearCanvas(this.nextFrame);
 
             FrameData last, current;
@@ -332,7 +332,7 @@ public class Controller {
 
         this.model.setCurrentFrameId(++id);
         // DEBUG:
-        System.out.println("Nachher: " + id);
+        //System.out.println("Nachher: " + id);
     }
 
 
@@ -342,7 +342,7 @@ public class Controller {
      *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
      */
     @FXML protected void backBtnHandleKeyPressed(KeyEvent event) {
-        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
         KeyCode pressed = event.getCode();
         if (pressed != KeyCode.ENTER) {
             this.handleKeyPressed(pressed);
@@ -356,7 +356,7 @@ public class Controller {
      *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
      */
     @FXML protected void nextBtnHandleKeyPressed(KeyEvent event) {
-        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
         KeyCode pressed = event.getCode();
         if (pressed != KeyCode.ENTER) {
             this.handleKeyPressed(pressed);
@@ -370,7 +370,7 @@ public class Controller {
      *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
      */
     @FXML protected void loadBtnHandleKeyPressed(KeyEvent event) {
-        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
         KeyCode pressed = event.getCode();
         if (pressed != KeyCode.ENTER) {
             this.handleKeyPressed(pressed);
@@ -384,7 +384,7 @@ public class Controller {
      *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
      */
     @FXML protected void saveLabelBtnHandleKeyPressed(KeyEvent event) {
-        /** Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren! */
+        // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
         KeyCode pressed = event.getCode();
         if (pressed != KeyCode.ENTER) {
             this.handleKeyPressed(pressed);
@@ -455,30 +455,42 @@ public class Controller {
         try {
             n_label_id = Integer.parseInt(this.txtLabelId.getText());
         } catch (Exception e) {
-            /** Fehlerbehandlung, weil der Inhalt keine Zahl ist! */
+            // Fehlerbehandlung, weil der Inhalt keine Zahl ist!
             System.out.println("Es wurde keine Zahl als neue Label-Id eingegeben!");
             return;
         }
 
 
-        /** Dient erstmal nur zum Test! */
-        /** TODO: das in schön verpacken und auslagern! */
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Dieses Frame nur oder alle?");
-        alert.setHeaderText("Soll das Label nur in diesem Frame oder in allen geändert werden?");
+        // Den Dialog aufrufen
+        int result = this.uiutil.dialogSaveLabel();
+        if (result > 0) {
+            int currentFrameId = this.model.getCurrentFrameId();
 
-        ButtonType eins = new ButtonType("Nur hier");
-        ButtonType alle = new ButtonType("Überall");
-        ButtonType cancel = new ButtonType("Abbrechen", ButtonBar.ButtonData.CANCEL_CLOSE);
+            if (result == 2) {
+                for (int i = 0; i < this.model.getFramesAmount(); i++) {
+                    if (i == this.model.getCurrentFrameId()) continue;
 
-        alert.getButtonTypes().setAll(eins, alle, cancel);
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == eins) {
-            // Im Model nur zu genau diesem Frame das Label ändern!
-        } else if (result.get() == alle) {
-            // Im Model durch alle Frames iterieren und die Label ändern!
-        } else {
-            // Es wurde abgebrochen!
+                    try {
+                        this.model.changeLabelIdByFrameNr(i, this.currentSelectedLabelId, n_label_id);
+                    } catch (IndexOutOfBoundsException e) {
+                        // Ich mach einfach gar nichts?
+                    }
+                }
+            }
+
+            this.model.changeLabelIdByFrameNr(currentFrameId, this.currentSelectedLabelId, n_label_id);
+            System.out.println("Changed Label: " + this.currentSelectedLabelId + " to " + n_label_id + " on " + currentFrameId);
+
+            // TODO: Hier wird etwas getrickst, um nicht nochmal darauf zu achten, was neugezeichnet wird und was nicht!
+            this.model.setCurrentFrameId(this.model.getCurrentFrameId() - 1);
+            this.getNextFrame(null);
+
+            // Alles zurücksetzen!
+            this.txtLabelId.setDisable(true);
+            this.saveLabelBtn.setDisable(true);
+
+            this.txtLabelId.setText("");
+            this.currentSelectedLabelId = -1;
         }
     }
 }
