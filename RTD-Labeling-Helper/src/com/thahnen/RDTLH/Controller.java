@@ -46,6 +46,8 @@ import java.util.List;
 public class Controller {
     @FXML private Button loadBtn;
     @FXML private Button saveBtn;
+    @FXML private RadioButton tooManyRadio;
+    @FXML private RadioButton tooLittleRadio;
     @FXML private Button saveLabelBtn;
     @FXML private Button backBtn;
     @FXML private Button nextBtn;
@@ -193,8 +195,22 @@ public class Controller {
     }
 
 
+    /**
+     *  Handler saveLabel (wenn Button "Labels speichern" gedrückt)
+     *
+     *
+     *  @param event
+     */
+    // TODO: muss nachher noch in saveLabel umgenannt werden!
     @FXML protected void saveLabels(ActionEvent event) {
+    }
 
+
+    @FXML protected void handleTooMany(ActionEvent event) {
+    }
+
+
+    @FXML protected void handleTooLittle(ActionEvent event) {
     }
 
 
@@ -453,6 +469,7 @@ public class Controller {
      *
      *  TODO: abfragen, ob nur in diesem Frame das Label geändert werden soll oder in allen!
      *  TODO: wenn in allen geändert werden soll, kann es vorkommen, dass mehrere Label die gleiche Id haben!
+     *  TODO: muss nachher noch in changeLabel umgenannt werden, da saveLabel anderweitig vergeben!
      */
     @FXML protected void saveLabel(ActionEvent event) {
         if (this.currentSelectedLabelId == -1) return;
