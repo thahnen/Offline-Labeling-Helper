@@ -19,7 +19,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="loadBtn" layoutX="860.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVideo" onKeyPressed="#loadBtnHandleKeyPressed" prefHeight="35.0" prefWidth="120.0" text="Video laden">
+      <Button fx:id="loadBtn" layoutX="760.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadVideo" onKeyPressed="#loadBtnHandleKeyPressed" prefHeight="35.0" prefWidth="150.0" text="Video laden">
          <font>
             <Font size="16.0" />
          </font>
@@ -38,9 +38,14 @@
          </font>
       </Label>
       <TextField fx:id="txtLabelId" disable="true" layoutX="930.0" layoutY="640.0" prefHeight="25.0" prefWidth="90.0" />
-      <Button fx:id="saveLabelBtn" disable="true" layoutX="830.0" layoutY="680.0" mnemonicParsing="false" onAction="#saveLabel" onKeyPressed="#saveLabelBtnHandleKeyPressed" prefHeight="35.0" prefWidth="180.0" text="Label Speichern">
+      <Button fx:id="saveLabelBtn" disable="true" layoutX="820.0" layoutY="680.0" mnemonicParsing="false" onAction="#saveLabel" onKeyPressed="#saveLabelBtnHandleKeyPressed" prefHeight="35.0" prefWidth="200.0" text="Label übernehmen">
          <font>
             <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="saveBtn" disable="true" layoutX="930.0" layoutY="20.0" mnemonicParsing="false" onAction="#saveLabels" prefHeight="35.0" prefWidth="150.0" text="Label speichern">
+         <font>
+            <Font size="16.0" />
          </font>
       </Button>
    </children>

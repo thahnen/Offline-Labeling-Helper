@@ -20,7 +20,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library>
+      <library name="OpenCV4">
         <CLASSES />
         <JAVADOC />
         <NATIVE>

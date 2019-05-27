@@ -32,9 +32,10 @@ import java.util.List;
  *
  *      Handler (Buttons):
  *      - loadVideo             =>      laed ein Video(/Frames) und Label ein
+ *      - saveLabels            =>      speichert die (veränderten) Label ab
  *      - getLastFrame          =>      setzt die ImageView's neu
  *      - getNextFrame          =>      setzt die ImageView's neu
- *      - handleBtnPress        =>      handhabt die Steuerung per Tastendruck      => TODO: fehlt noch
+ *      - handleBtnPress        =>      handhabt die Steuerung per Tastendruck
  *
  *      Handler (ImageView):
  *      - handleMouseClick      =>      handhabt das Auswaehlen von einzelnen Labels
@@ -44,6 +45,7 @@ import java.util.List;
 
 public class Controller {
     @FXML private Button loadBtn;
+    @FXML private Button saveBtn;
     @FXML private Button saveLabelBtn;
     @FXML private Button backBtn;
     @FXML private Button nextBtn;
@@ -188,6 +190,11 @@ public class Controller {
              *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
              */
         }
+    }
+
+
+    @FXML protected void saveLabels(ActionEvent event) {
+
     }
 
 

@@ -7,30 +7,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaFXApp.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sample/00.dvs_record.celex_04.dvs.avi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sample/darkflow_parsed.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sample/script.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RTD-Labeling-Helper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RTDLH.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/META-INF/RTD-Labeling-Helper.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/data/FrameData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/data/Label.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/res/UI.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/res/UI.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/util/FileUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RTD-Labeling-Helper/RDTLH/util/UIUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/data/FrameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/data/FrameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/data/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/data/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/res/UI.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/res/UI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RDTLH/util/UIUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/util/UIUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTDLH.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RTDLH.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/res/UI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/res/UI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/util/FileUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RTDLH/com/thahnen/RDTLH/util/FileUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,20 +77,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,11 +89,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="-371">
+              <caret line="37" column="78" selection-start-line="37" selection-start-column="78" selection-end-line="37" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -126,7 +104,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/UIUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
+            <state relative-caret-position="619">
               <caret line="128" column="35" selection-start-line="128" selection-start-column="35" selection-end-line="128" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -136,10 +114,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Model.java">
+        <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="120" selection-start-line="8" selection-start-column="120" selection-end-line="8" selection-end-column="120" />
+            <state relative-caret-position="-71">
+              <caret line="32" column="83" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -189,6 +167,8 @@
         <option value="$PROJECT_DIR$/RTD-Labeling-Helper.iml" />
         <option value="$PROJECT_DIR$/src/module-info.java" />
         <option value="$PROJECT_DIR$/src/com/thahnen/RDTLH/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java" />
+        <option value="$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java" />
       </list>
     </option>
   </component>
@@ -225,25 +205,14 @@
             </path>
             <path>
               <item name="RTD-Labeling-Helper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RTD-Labeling-Helper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RTD-Labeling-Helper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RTD-Labeling-Helper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="RDTLH" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RTD-Labeling-Helper" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -344,53 +313,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="RTDLH" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="RTDLH" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -432,17 +354,19 @@
       <workItem from="1557993710695" duration="27928000" />
       <workItem from="1558605683596" duration="21182000" />
       <workItem from="1558703586450" duration="18000" />
-      <workItem from="1558703624829" duration="2961000" />
+      <workItem from="1558703624829" duration="3218000" />
+      <workItem from="1558954063015" duration="3653000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69269000" />
+    <option name="totallyTimeSpent" value="73179000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1922" height="1025" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26574174" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.26894343" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -451,7 +375,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32924107" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.328125" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.328125" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39955357" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -531,26 +455,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="40" column="171" selection-start-line="40" selection-start-column="143" selection-end-line="40" selection-end-column="171" />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/rtd-labeling-helper.xml" />
     <entry file="file://$PROJECT_DIR$/rtd-labeling-helper.properties" />
-    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/UIUtil.java">
+    <entry file="jar:///usr/lib/jvm/java-12-oracle/lib/src.zip!/java.base/java/lang/ClassLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="128" column="35" selection-start-line="128" selection-start-column="35" selection-end-line="128" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="191">
+          <caret line="2659" selection-start-line="2659" selection-end-line="2659" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/module-info.java" />
     <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Model.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -561,23 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-12-oracle/lib/src.zip!/java.base/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="2659" selection-start-line="2659" selection-end-line="2659" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/RTDLH.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
@@ -585,27 +482,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="34" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        <state relative-caret-position="135">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/module-info.java">
+    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/res/UI.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        <state relative-caret-position="600">
+          <caret line="40" column="171" selection-start-line="40" selection-start-column="143" selection-end-line="40" selection-end-column="171" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Main.java">
+    <entry file="jar:///usr/lib/jvm/java-12-oracle/lib/src.zip!/java.base/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="-4916">
+          <caret line="1913" lean-forward="true" selection-start-line="1913" selection-end-line="1913" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-71">
+          <caret line="32" column="83" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="83" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/util/UIUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="619">
+          <caret line="128" column="35" selection-start-line="128" selection-start-column="35" selection-end-line="128" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thahnen/RDTLH/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-371">
+          <caret line="37" column="78" selection-start-line="37" selection-start-column="78" selection-end-line="37" selection-end-column="78" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -620,6 +551,7 @@
             <option name="proportions">
               <list>
                 <option value="0.15052164" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -642,7 +574,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.15052164" />
               </list>
             </option>
           </splitter-proportions>
@@ -650,10 +582,11 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
+          <last-edited>12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.15052164" />
               </list>
             </option>
           </splitter-proportions>
