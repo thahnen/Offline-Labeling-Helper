@@ -43,7 +43,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="saveBtn" disable="true" layoutX="930.0" layoutY="20.0" mnemonicParsing="false" onAction="#saveLabels" prefHeight="35.0" prefWidth="150.0" text="Label speichern">
+      <Button fx:id="saveBtn" disable="true" layoutX="930.0" layoutY="20.0" mnemonicParsing="false" onAction="#saveLabels" onKeyPressed="#saveBtnHandleKeyPressed" prefHeight="35.0" prefWidth="150.0" text="Label speichern">
          <font>
             <Font size="16.0" />
          </font>

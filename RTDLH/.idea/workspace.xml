@@ -7,66 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba67addf-f46e-4c1f-b6d2-80b8391a48bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileContent/fileContent.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/javaCompile.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/javaCompile/taskHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Launcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/RTDLH.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/lib/json-simple-1.1.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/META-INF/RTDLH.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/Model.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/data/FrameData.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/data/Label.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/res/UI.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/res/UI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/util/FileUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/out/production/RTDLH/com/thahnen/RDTLH/util/UIUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/data/FrameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/data/FrameData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/data/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/data/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/res/UI.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/res/UI.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/util/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/util/FileUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RTD-Labeling-Helper/src/com/thahnen/RDTLH/util/UIUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/util/UIUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.3/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/thahnen/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/thahnen/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/UI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/UI.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/modules/target/" />
@@ -118,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+            <state relative-caret-position="540">
+              <caret line="36" column="128" selection-start-line="36" selection-start-column="128" selection-end-line="36" selection-end-column="128" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="19" selection-start-column="19" selection-end-column="19" />
+            <state relative-caret-position="1170">
+              <caret line="264" column="28" lean-forward="true" selection-start-line="264" selection-start-column="28" selection-end-line="264" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,8 +91,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/util/FileUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
+            <state relative-caret-position="330">
+              <caret line="22" column="120" lean-forward="true" selection-start-line="22" selection-start-column="120" selection-end-line="22" selection-end-column="120" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -164,7 +116,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Model.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thahnen/data/FrameData.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thahnen/data/Label.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/thahnen/util/UIUtil.java" />
@@ -172,8 +123,9 @@
         <option value="$PROJECT_DIR$/src/main/java/module-info.java" />
         <option value="$PROJECT_DIR$/src/main/resources/UI.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Launcher.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Main.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java" />
       </list>
     </option>
   </component>
@@ -197,6 +149,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -230,11 +183,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="thahnen" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="RTDLH" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RTDLH" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,7 +237,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.RTDLH [jlink]">
+  <component name="RunManager" selected="Gradle.RTDLH [distZip]">
     <configuration name="RTDLH [distZip]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -363,9 +322,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.RTDLH [distZip]" />
         <item itemvalue="Gradle.RTDLH [jlink]" />
         <item itemvalue="Gradle.RTDLH [run]" />
-        <item itemvalue="Gradle.RTDLH [distZip]" />
         <item itemvalue="Gradle.RTDLH [installDist]" />
       </list>
     </recent_temporary>
@@ -382,12 +341,13 @@
       <updated>1558965083423</updated>
       <workItem from="1558965084593" duration="3384000" />
       <workItem from="1558968481458" duration="10420000" />
-      <workItem from="1559558347146" duration="3028000" />
+      <workItem from="1559558347146" duration="3596000" />
+      <workItem from="1559562378719" duration="1497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16832000" />
+    <option name="totallyTimeSpent" value="18897000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -401,7 +361,7 @@
   <component name="ToolWindowManager">
     <frame x="-1" y="28" width="1922" height="1025" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25506938" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25773746" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -410,7 +370,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32962137" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32924107" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4994664" weight="0.32924107" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -418,7 +378,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.32962137" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053364" side_tool="true" weight="0.32924107" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32962137" />
@@ -441,9 +401,7 @@
     <entry file="file://$PROJECT_DIR$/gradlew.bat">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/build/image/bin/RTDLH">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/build/image/bin/RTDLH" />
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -482,14 +440,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/res/UI.fxml" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/UI.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -527,23 +477,6 @@
     <entry file="file://$PROJECT_DIR$/build/scripts/RTDLH">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/util/FileUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="41" selection-start-line="8" selection-start-column="41" selection-end-line="8" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -551,10 +484,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/UI.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="9" column="138" selection-start-line="9" selection-start-column="138" selection-end-line="9" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/util/FileUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="120" lean-forward="true" selection-start-line="22" selection-start-column="120" selection-end-line="22" selection-end-column="120" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="264" column="28" lean-forward="true" selection-start-line="264" selection-start-column="28" selection-end-line="264" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/thahnen/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="57" selection-start-line="24" selection-start-column="57" selection-end-line="24" selection-end-column="57" />
+        <state relative-caret-position="540">
+          <caret line="36" column="128" selection-start-line="36" selection-start-column="128" selection-end-line="36" selection-end-column="128" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -34,6 +34,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        // TODO: hier die Pfade für Windows / *nix anpassen: OpenCV 3.4.2 soll erstmal nur im Home-Verzeichnis installiert sein!
         // ueber System.getenv("HOME") gemacht, damit es Konten-/BS-unabhaengig ist!
         System.load(System.getenv("HOME") + "/opencv-3.4.2/build/lib/libopencv_java342.so");
         launch(args);

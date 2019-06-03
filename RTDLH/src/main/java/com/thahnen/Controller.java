@@ -181,6 +181,7 @@ public class Controller {
 
 
             // 5) Alle UI-Elemente aktivieren, die deaktiviert waren
+            this.saveBtn.setDisable(false);
             this.loadBtn.setDisable(true);          // bis anständig geregelt ist, was passiert, wenn man neuläd!
             this.currentFrame.setDisable(false);
             this.backBtn.setDisable(false);
@@ -194,7 +195,34 @@ public class Controller {
 
 
     @FXML protected void saveLabels(ActionEvent event) {
+        FileChooser chooser = new FileChooser();
 
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("nix") || os.contains("nux")) {
+            // Linux
+            chooser.setInitialDirectory(new File(System.getenv("HOME")));
+        } else {
+            // Windows oder etwas anderes!
+        }
+
+        chooser.setTitle("JSON-Datei zum abspeichern auswählen!");
+
+        File datei = chooser.showSaveDialog(((Node) event.getSource()).getScene().getWindow());
+        if (datei != null) {
+            try {
+                FileUtil.saveLabelsToJSON(datei, this.model.getFrameInfo());
+            } catch (Exception e) {
+                /*
+                    FEHLERBEHANDLUNG: KONNTE NICHT ABGESPEICHERT WERDEN
+                 */
+                System.out.println(e);
+            }
+        } else {
+            /*
+                FEHLERBEHANDLUNG: ZU VIEL/ NICHTS AUSGEWÄHLT
+             */
+            System.out.println("Zu viel oder nichts ausgewählt!");
+        }
     }
 
 
@@ -376,6 +404,20 @@ public class Controller {
      *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
      */
     @FXML protected void loadBtnHandleKeyPressed(KeyEvent event) {
+        // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
+        KeyCode pressed = event.getCode();
+        if (pressed != KeyCode.ENTER) {
+            this.handleKeyPressed(pressed);
+        }
+    }
+
+
+    /**
+     *  EventHandler, der ausgeführt wird, wenn, während der der "Label speichern"-Button fokussiert, eine Taste gedrückt wurde
+     *
+     *  @param event        Das Event, aus dem der KeyCode extrahiert wird!
+     */
+    @FXML protected void saveBtnHandleKeyPressed(KeyEvent event) {
         // Auswerten, welcher Knopf gedrueckt wurde, darauf reagieren!
         KeyCode pressed = event.getCode();
         if (pressed != KeyCode.ENTER) {
