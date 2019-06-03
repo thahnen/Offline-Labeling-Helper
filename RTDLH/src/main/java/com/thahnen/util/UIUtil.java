@@ -8,9 +8,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 
@@ -115,7 +117,71 @@ public final class UIUtil {
     }
 
 
-    public int dialogSaveLabel() {
+    /*******************************************************************************************************************
+     *
+     *      DIALOGE ALLER ART (ungefaehr nach dem Sequenzdiagramm sortiert)
+     *
+     *******************************************************************************************************************/
+
+
+    /**
+     *  Zeigt den Dialog an, in dem man auswaehlen kann, in welchem Format das Video vorliegt (Video-Datei oder Frames)
+     *
+     *  @return         eine, der jeweiligen Auswahlmoeglichkeit zugeordneten, Zahl, die dann ueberprueft werden muss!
+     *
+     *  TODO: was auch immer es mit diesem Raw-Type auf sich hat!
+     */
+    public static short dialogChooseVideoFormat() {
+        final ArrayList<String> options = new ArrayList<>(Arrays.asList(
+                "AVI-Video",
+                "PNG-Frames"
+        ));
+
+        ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+        dialog.setTitle("Video laden");
+        dialog.setHeaderText("Video-Format waehlen!");
+
+        Optional<String> res = dialog.showAndWait();
+        if (res.isPresent()) {
+            return (short) options.indexOf(res);
+        }
+        return -1;
+    }
+
+
+    /**
+     *  Zeigt den Dialog an, in dem man auswaehlen kann, in welchem Format die Label vorliegen (JSON, CSV, ...)
+     *
+     *  @return         eine, der jeweiligen Auswahlmoeglichkeit zugeordneten, Zahl, die dann ueberprueft werden muss!
+     *
+     *  TODO: was auch immer es mit diesem Raw-Type auf sich hat!
+     */
+    public static short dialogChooseLabelFormat() {
+        final ArrayList<String> options = new ArrayList<>(Arrays.asList(
+                "JSON",
+                "CSV (Darkflow)"
+        ));
+
+        ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
+        dialog.setTitle("Label laden");
+        dialog.setHeaderText("Label-Format waehlen!");
+
+        Optional<String> res = dialog.showAndWait();
+        if (res.isPresent()) {
+            return (short) options.indexOf(res);
+        }
+        return -1;
+    }
+
+
+    /**
+     *  Zeigt den Dialog zum speichern eines ausgewaehlten Labels an (ob alle oder nur eins gespeichert werden soll)
+     *
+     *  @return             eine, dem jeweiligen Button zugeordnete, Zahl, die dann nur überprueft werden muss.
+     *
+     *  TODO: wir wollen ja eigentlich keinen Speicherplatz verschwenden, deshalb später Rückgabewert in "short" ändern!
+     */
+    public static int dialogSaveLabel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Dieses Frame nur oder alle?");
         alert.setHeaderText("Soll das Label nur in diesem Frame oder in allen geändert werden?");
@@ -126,12 +192,14 @@ public final class UIUtil {
 
         alert.getButtonTypes().setAll(eins, alle, cancel);
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == eins) {
-            return 1;
-        } else if (result.get() == alle) {
-            return 2;
-        } else {
-            return -1;
+        if (result.isPresent()) {
+            if (result.get() == eins) {
+                return 1;
+            } else if (result.get() == alle) {
+                return 2;
+            }
         }
+
+        return -1;
     }
 }

@@ -74,12 +74,13 @@ public class Controller {
      *
      *  TODO: ggf anstatt eines FileChooser's für ein Video + Label-Datei, DirectoryChooser nehmen für Frames + Label-Datei
      *  TODO: => dann müssen nicht ALLE Frames des Videos eingelesen werden sondern kann dynamischer gemacht werden!
-     *
-     *  TODO: mehr Formate unterstuetzen fuer die Label und fuer das Video/ die Frames!
-     *
-     *  TODO: bei Fehlern ein PopUp oeffnen mit entsprechendem Text!
      */
     @FXML protected void loadVideo(ActionEvent event) {
+        /** 1) nachfragen, in welchem Format das Video vorliegt */
+
+        /** 2) nachfragen, in welchem Format die Label vorliegen */
+
+
         FileChooser chooser = new FileChooser();
 
         String os = System.getProperty("os.name").toLowerCase();
@@ -510,7 +511,7 @@ public class Controller {
 
 
         // Den Dialog aufrufen
-        int result = this.uiutil.dialogSaveLabel();
+        int result = UIUtil.dialogSaveLabel();
         if (result > 0) {
             int currentFrameId = this.model.getCurrentFrameId();
 
