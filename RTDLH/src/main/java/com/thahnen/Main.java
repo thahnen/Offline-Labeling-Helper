@@ -8,6 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
+
 
 public class Main extends Application {
 
@@ -38,23 +40,37 @@ public class Main extends Application {
         String os = System.getProperty("os.name").toLowerCase();
         String folder;
         if (os.contains("nix") || os.contains("nux")) {
-            // Linux
+            // Linux + "Unix"
             folder = "/opencv-3.4.2/build/lib/libopencv_java342.so";
+        } else if (os.contains("os x")) {
+            // macOS
+            folder = "/opencv-3.4.2/build/lib/libopencv_java342.dylib";
         } else if (os.contains("win")) {
             // Windows
             folder = "\\opencv-3.4.2\\build\\lib\\libopencv_java342.dll";
         } else {
             // TODO: Pop-Up mit Warnhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
             System.out.println("OS noch nicht unterstützt, kommt noch: Issue auf GitHub verfassen!");
+            System.exit(1);
             return;
+        }
+
+        String library_path = System.getenv("HOME") + folder;
+        if (!new File(library_path).exists()) {
+            // TODO: Pop-Up mit Fehlerhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
+            System.out.println("OpenCV 3.4.2 konnte nicht gefunden werden!");
+            System.exit(1);
+            return;
+
         }
 
         try {
             // ueber System.getenv("HOME") gemacht, damit es Konten-/BS-unabhaengig ist!
-            System.load(System.getenv("HOME") + folder);
+            System.load(library_path);
         } catch (Exception e) {
             // TODO: Pop-Up mit Fehlerhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
-            System.out.println("OpenCV 3.4.2 konnte nicht geladen werden aus: " + System.getenv("HOME") + folder);
+            System.out.println("OpenCV 3.4.2 konnte nicht geladen werden!");
+            System.exit(1);
             return;
         }
 
