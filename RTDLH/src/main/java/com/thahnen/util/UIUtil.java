@@ -29,16 +29,10 @@ import java.util.Optional;
  *      - getClickedLabelId     =>      gibt die Label-Id von dem Label zurück, auf das im Canvas geklickt wurde
  *                                      TODO: ggf keine Fehler zurückgeben oder so
  *
- *      TODO: ggf doch alle Funktionen statisch machen (ausser die Klasse muss irgendwelche Infos speichern)
- *
  ***********************************************************************************************************************/
 
 
 public final class UIUtil {
-
-    public UIUtil() {}
-
-
     /**
      *  Updatet das jeweils angegebene Canvas mit einem Bild und den Labeln!
      *
@@ -46,7 +40,7 @@ public final class UIUtil {
      *  @param image        Das anzuzeigende Frame
      *  @param data         Die Frame-Daten zum jeweiligen Frame, daraus werden die Labels extrahiert!
      */
-    public void updateCanvas(Canvas view, Image image, FrameData data) {
+    public static void updateCanvas(Canvas view, Image image, FrameData data) {
         final GraphicsContext gc = view.getGraphicsContext2D();
 
         /** 1) Set the ImageView to the new Image */
@@ -87,7 +81,7 @@ public final class UIUtil {
      *
      *  TODO: kann zu einem Einzeiler gemacht werden!
      */
-    public void clearCanvas(Canvas view) {
+    public static void clearCanvas(Canvas view) {
         final GraphicsContext gc = view.getGraphicsContext2D();
         gc.clearRect(0, 0, view.getWidth(), view.getHeight());
     }
@@ -100,9 +94,10 @@ public final class UIUtil {
      *  @param x            Die X-Koordinate des Klick-Events
      *  @param y            Die Y-Koordinate des Klick-Events
      *  @param data         Die Frame-Daten zum jeweiligen Frame, um daraus alle vorhandenen Labels abzufragen!
+     *  @return             Die Label-Id des zuerst gefundenem angeklickten Label!
      *  @throws NoSuchFieldException
      */
-    public int getClickedLabelId(Canvas view, double x, double y, FrameData data) throws NoSuchFieldException {
+    public static int getClickedLabelId(Canvas view, double x, double y, FrameData data) throws NoSuchFieldException {
         double scaleX = view.getWidth()/768;
         double scaleY = view.getHeight()/640;
 
@@ -129,9 +124,10 @@ public final class UIUtil {
      *
      *  @return         eine, der jeweiligen Auswahlmoeglichkeit zugeordneten, Zahl, die dann ueberprueft werden muss!
      *
-     *  TODO: was auch immer es mit diesem Raw-Type auf sich hat!
+     *  TODO: wenn es sich um einzelne Frames handelt muss aber die Reihenfolge eindeutig sein!
      */
-    public static short dialogChooseVideoFormat() {
+    @SuppressWarnings("unchecked")
+    public static byte dialogChooseVideoFormat() {
         final ArrayList<String> options = new ArrayList<>(Arrays.asList(
                 "AVI-Video",            // 0 => 1 mal Video
                 "PNG-Frames"            // 1 => X mal PNG
@@ -143,7 +139,7 @@ public final class UIUtil {
 
         Optional<String> res = dialog.showAndWait();
         if (res.isPresent()) {
-            return (short) options.indexOf(res);
+            return (byte) options.indexOf(res.get());
         }
         return -1;
     }
@@ -153,10 +149,9 @@ public final class UIUtil {
      *  Zeigt den Dialog an, in dem man auswaehlen kann, in welchem Format die Label vorliegen (JSON, CSV, ...)
      *
      *  @return         eine, der jeweiligen Auswahlmoeglichkeit zugeordneten, Zahl, die dann ueberprueft werden muss!
-     *
-     *  TODO: was auch immer es mit diesem Raw-Type auf sich hat!
      */
-    public static short dialogChooseLabelFormat() {
+    @SuppressWarnings("unchecked")
+    public static byte dialogChooseLabelFormat() {
         final ArrayList<String> options = new ArrayList<>(Arrays.asList(
                 "JSON",                 // 0 => 1 mal JSON
                 "CSV (Darkflow)"        // 1 => 1 mal CSV
@@ -168,7 +163,7 @@ public final class UIUtil {
 
         Optional<String> res = dialog.showAndWait();
         if (res.isPresent()) {
-            return (short) options.indexOf(res);
+            return (byte) options.indexOf(res.get());
         }
         return -1;
     }
@@ -178,10 +173,8 @@ public final class UIUtil {
      *  Zeigt den Dialog zum speichern eines ausgewaehlten Labels an (ob alle oder nur eins gespeichert werden soll)
      *
      *  @return             eine, dem jeweiligen Button zugeordnete, Zahl, die dann nur überprueft werden muss.
-     *
-     *  TODO: wir wollen ja eigentlich keinen Speicherplatz verschwenden, deshalb später Rückgabewert in "short" ändern!
      */
-    public static int dialogSaveLabel() {
+    public static byte dialogSaveLabel() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Dieses Frame nur oder alle?");
         alert.setHeaderText("Soll das Label nur in diesem Frame oder in allen geändert werden?");

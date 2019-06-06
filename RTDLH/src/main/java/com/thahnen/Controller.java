@@ -2,6 +2,7 @@ package com.thahnen;
 
 import com.thahnen.data.FrameData;
 import com.thahnen.util.FileUtil;
+import com.thahnen.util.SysUTIL;
 import com.thahnen.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,7 +17,6 @@ import javafx.stage.FileChooser;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /***********************************************************************************************************************
@@ -55,129 +55,60 @@ public class Controller {
     @FXML private TextField txtLabelId;
 
     private Model model;
-    private UIUtil uiutil;
 
     private int currentSelectedLabelId;
 
 
     public Controller() {
         this.model = new Model();
-        this.uiutil = new UIUtil();
         this.currentSelectedLabelId = -1;
     }
 
 
     /**
      *  Handler loadVideo (wenn Button "Video laden" gedrueckt)
-     *  => liest ein Video ein: in der Version Frame fuer Frame, was lange dauert und nicht gross sein darf!
-     *  => liest die Labels ein: in der Version ueber JSON
-     *
-     *  TODO: ggf anstatt eines FileChooser's für ein Video + Label-Datei, DirectoryChooser nehmen für Frames + Label-Datei
-     *  TODO: => dann müssen nicht ALLE Frames des Videos eingelesen werden sondern kann dynamischer gemacht werden!
+     *  => liest ein Video ein: es wird abgefragt, in welchem Format das Video vorliegt, dann wird es eingelesen!
+     *  => liest die Labels ein: es wird abgefragt, in welchem Format die Label vorliegen, dann wird eingelesen!
      */
     @FXML protected void loadVideo(ActionEvent event) {
         /** 1) nachfragen, in welchem Format das Video vorliegt */
-        /*
+        boolean singleFile = true;
         switch (UIUtil.dialogChooseVideoFormat()) {
             case 0:
                 // AVI-Video, ergo FileChooser
                 break;
             case 1:
                 // PNG-Frames, ergo DirectoryChooser (oder auch FileChooser?)
+                singleFile = false;
                 break;
             case -1:
                 // Abbruch
-                break;
+                // DEBUG:
+                System.out.println("Video laden wurde beim 'Video Format wählen' abgebrochen!");
+                return;
         }
-         */
 
         /** 2) Video (in angegebenem Format) laden */
+        if (singleFile) {
+            FileChooser chooser = new FileChooser();
+            chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
+            chooser.setTitle("Video-Datei auswählen!");
 
-        /** 3) nachfragen, in welchem Format die Label vorliegen */
-        /*
-        switch (UIUtil.dialogChooseLabelFormat()) {
-            case 0:
-                // JSON-Datei, ergo FileChooser
-                break;
-            case 1:
-                // CSV-Datei, ergo FileChooser
-                break;
-            case -1:
-                // Abbruch
-                break;
-        }
-         */
-
-        /** 4) Label (in angegebenem Format) laden */
-
-
-        FileChooser chooser = new FileChooser();
-
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("nix") || os.contains("nux")) {
-            // Linux
-            chooser.setInitialDirectory(new File(System.getenv("HOME")));
-        } else {
-            // Windows oder etwas anderes!
-        }
-
-        chooser.setTitle("Video und Label-Datei auswaehlen!");
-
-        List<File> dateien = chooser.showOpenMultipleDialog(((Node) event.getSource()).getScene().getWindow());
-        if (dateien != null) {
-            // 1) Dateien auf Richtigkeit ueberpruefen
-            if (dateien.size() != 2) {
-                /*
-                 *  FEHLERBEHANDLUNG: ANZAHL DATEIEN != 2
-                 */
-                System.out.println("Es wurden nicht genau zwei Dateien ausgewaehlt!");
-                return;
-            } else if (!(dateien.get(0).getName().endsWith(".json") || dateien.get(1).getName().endsWith(".json"))) {
-                /*
-                 *  FEHLERBEHANDLUNG: KEINE JSON-DATEI AUSGEWAEHLT
-                 */
-                System.out.println("Es wurde keine JSON-Datei mit ausgewaehlt!");
-                return;
-            } else if (!(dateien.get(0).getName().endsWith(".avi") || dateien.get(1).getName().endsWith(".avi"))) {
-                /*
-                 *  FEHLERBEHANDLUNG: KEINE AVI-VIDEO-DATEI AUSGEWAEHLT
-                 */
-                System.out.println("Es wurde keien AVI-Datei mit ausgewaehlt!");
+            File video = chooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+            if (video == null) {
+                // Fehlerbehandlung weil nichts ausgewählt!
                 return;
             }
 
-
-            File video, label;
-            if (dateien.get(0).getName().endsWith(".json")) {
-                label = dateien.get(0);
-                video = dateien.get(1);
-            } else {
-                label = dateien.get(1);
-                video = dateien.get(0);
-            }
-
-
-            // 2) Labels als FrameData einlesen!
-            try {
-                ArrayList<FrameData> frame_info = FileUtil.loadLabelsFromJSON(label);
-                this.model.setFrameInfo(frame_info);
-            } catch (Exception e) {
-                // TODO: das hier muss später noch etwas genauer gemacht werden mit unterschiedlichen Exceptions!
-                System.out.println(e);
-                return;
-            }
-            System.out.println("FrameData set: " + this.model.getFrameInfo().size());
-
-
-            // 3) Video(-Frames) einlesen
-            // Nur Videos unter 50mb nehmen!
+            // TODO: nur Videos unter 50mb => nachher anders loesen
             System.out.println("Videogroesse: " + (video.length() / (1024*1024)) + "mb");
             if ((video.length() / (1024*1024)) > 50) {
+                // Fehlerbehandlung weil Video zu gross
                 System.out.println("Das angegebene Video ist zu gross!");
                 return;
             }
 
-            // Die einzelnen Frames verarbeiten (kann einen Moment dauern!)
+            // TODO: einzelne Frames extrahieren und abspeichern => nachher anders loesen
             try {
                 ArrayList<Image> frames = FileUtil.loadFramesFromVideo(video);
                 this.model.setFrames(frames);
@@ -187,55 +118,93 @@ public class Controller {
                 return;
             }
             System.out.println("Frames set: " + this.model.getFramesAmount());
-
-
-            // 4) Initiale Werte (Frames + Label) setzen
-            this.model.setCurrentFrameId(0);
-
-            FrameData current, next;
-            try {
-                current = this.model.getFrameDataByFrameNr(0);
-            } catch (IndexOutOfBoundsException e) {
-                current = null;
-                System.out.println("Init: current is null!");
-            }
-
-            try {
-                next = this.model.getFrameDataByFrameNr(1);
-            } catch (IndexOutOfBoundsException e) {
-                next = null;
-                System.out.println("Init: next is null!");
-            }
-
-            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(0), current);
-            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(1), next);
-
-
-            // 5) Alle UI-Elemente aktivieren, die deaktiviert waren
-            this.saveBtn.setDisable(false);
-            this.loadBtn.setDisable(true);          // bis anständig geregelt ist, was passiert, wenn man neuläd!
-            this.currentFrame.setDisable(false);
-            this.backBtn.setDisable(false);
-            this.nextBtn.setDisable(false);
         } else {
-            /*
-             *  FEHLERBEHANDLUNG: NICHTS AUSGEWAEHLT
-             */
+            // Noch nicht implementiert
+            // TODO: kleines Dialogfenster machen, dafür, dass Feature noch nicht implementiert ist!
+            System.out.println("Laden per Frames noch nicht implementiert!");
+            return;
         }
+
+        /** 3) nachfragen, in welchem Format die Label vorliegen */
+        byte format = UIUtil.dialogChooseLabelFormat();
+        if (format == -1) {
+            // Abbruch
+            System.out.println("Video laden wurde beim 'Label Format wählen' abgebrochen!");
+            return;
+        }
+
+        /** 4) Label (in angegebenem Format) laden */
+        FileChooser chooser = new FileChooser();
+        chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
+        chooser.setTitle("Label-Datei auswählen!");
+
+        File label = chooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+        if (label == null) {
+            // Fehlerbehandlung weil nichts ausgewählt!
+            return;
+        }
+
+        switch (format) {
+            case 0:
+                // JSON
+                // 2) Labels als FrameData einlesen!
+                try {
+                    ArrayList<FrameData> frame_info = FileUtil.loadLabelsFromJSON(label);
+                    this.model.setFrameInfo(frame_info);
+                } catch (Exception e) {
+                    // TODO: das hier muss später noch etwas genauer gemacht werden mit unterschiedlichen Exceptions!
+                    System.out.println(e);
+                    return;
+                }
+                System.out.println("FrameData set: " + this.model.getFrameInfo().size());
+
+                break;
+            case 1:
+                // Darkflow-CSV
+                // Noch nicht implementiert
+                // TODO: kleines Dialogfenster machen, dafür, dass Feature noch nicht implementiert ist!
+                System.out.println("Darkflow-CSV noch nicht implementiert!");
+                return;
+        }
+
+        /** 5) Initiale Werte setzen */
+        this.model.setCurrentFrameId(0);
+
+        FrameData current, next;
+        try {
+            current = this.model.getFrameDataByFrameNr(0);
+        } catch (IndexOutOfBoundsException e) {
+            current = null;
+            System.out.println("Init: current is null!");
+        }
+
+        try {
+            next = this.model.getFrameDataByFrameNr(1);
+        } catch (IndexOutOfBoundsException e) {
+            next = null;
+            System.out.println("Init: next is null!");
+        }
+
+        UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(0), current);
+        UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(1), next);
+
+        /** 6) Alle UI-Elemente entsprechend aktivieren/ deaktivieren */
+        this.saveBtn.setDisable(false);
+        this.loadBtn.setDisable(true);          // bis anständig geregelt ist, was passiert, wenn man neuläd!
+        this.currentFrame.setDisable(false);
+        this.backBtn.setDisable(false);
+        this.nextBtn.setDisable(false);
     }
 
 
+    /**
+     *
+     *  @param event
+     */
     @FXML protected void saveLabels(ActionEvent event) {
+        // TODO: ggf noch eine Extension vorgeben, je nachdem in welchem Format geladen!
         FileChooser chooser = new FileChooser();
-
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("nix") || os.contains("nux")) {
-            // Linux
-            chooser.setInitialDirectory(new File(System.getenv("HOME")));
-        } else {
-            // Windows oder etwas anderes!
-        }
-
+        chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
         chooser.setTitle("JSON-Datei zum abspeichern auswählen!");
 
         File datei = chooser.showSaveDialog(((Node) event.getSource()).getScene().getWindow());
@@ -281,7 +250,7 @@ public class Controller {
             return;
         } else if (id == 1) {
             // Es muss das "lastFrame" noch geloescht werden!
-            this.uiutil.clearCanvas(this.lastFrame);
+            UIUtil.clearCanvas(this.lastFrame);
 
             FrameData current, next;
             try {
@@ -296,8 +265,8 @@ public class Controller {
                 next = null;
             }
 
-            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
-            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
         } else {
             FrameData last, current, next;
             try {
@@ -318,9 +287,9 @@ public class Controller {
                 next = null;
             }
 
-            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id-2), last);
-            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
-            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
+            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id-2), last);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id-1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id), next);
         }
 
         this.model.setCurrentFrameId(--id);
@@ -353,7 +322,7 @@ public class Controller {
             return;
         } else if (id == amount-2) {
             // Es muss das "nextFrame" noch geloescht werden!
-            this.uiutil.clearCanvas(this.nextFrame);
+            UIUtil.clearCanvas(this.nextFrame);
 
             FrameData last, current;
             try {
@@ -368,8 +337,8 @@ public class Controller {
                 current = null;
             }
 
-            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
-            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
+            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
         } else {
             FrameData last, current, next;
             try {
@@ -390,9 +359,9 @@ public class Controller {
                 next = null;
             }
 
-            this.uiutil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
-            this.uiutil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
-            this.uiutil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+2), next);
+            UIUtil.updateCanvas(this.lastFrame, this.model.getFrameByIndex(id), last);
+            UIUtil.updateCanvas(this.currentFrame, this.model.getFrameByIndex(id+1), current);
+            UIUtil.updateCanvas(this.nextFrame, this.model.getFrameByIndex(id+2), next);
         }
 
         this.model.setCurrentFrameId(++id);
@@ -500,7 +469,7 @@ public class Controller {
 
         int label_id;
         try {
-            label_id = this.uiutil.getClickedLabelId(this.currentFrame, x, y, this.model.getFrameDataByFrameNr(this.model.getCurrentFrameId()));
+            label_id = UIUtil.getClickedLabelId(this.currentFrame, x, y, this.model.getFrameDataByFrameNr(this.model.getCurrentFrameId()));
 
             // Das TextField und den Button freigeben!
             this.txtLabelId.setDisable(false);
@@ -541,7 +510,7 @@ public class Controller {
 
 
         // Den Dialog aufrufen
-        int result = UIUtil.dialogSaveLabel();
+        byte result = UIUtil.dialogSaveLabel();
         if (result > 0) {
             int currentFrameId = this.model.getCurrentFrameId();
 

@@ -129,7 +129,7 @@ public final class FileUtil {
     /**
      *  Liste die Frames aus einem Video ein (ohne auf Eigenschaften zu pruefen)
      *
-     *  @param file         Video-Datei
+     *  @param file         Video-Datei (nur AVI wird unterstuetzt!)
      *  @return             Liste mit allen Frames als JavaFX-Image
      *  @throws Exception   Mehrere unterschiedliche Fehler
      */

@@ -1,5 +1,6 @@
 package com.thahnen;
 
+import com.thahnen.util.SysUTIL;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -37,25 +38,25 @@ public class Main extends Application {
     public static void main(String[] args) {
         /** OpenCV 3.4.2 soll erstmal nur im Home-Verzeichnis unterstützt werden! */
 
-        String os = System.getProperty("os.name").toLowerCase();
         String folder;
-        if (os.contains("nix") || os.contains("nux")) {
-            // Linux + "Unix"
-            folder = "/opencv-3.4.2/build/lib/libopencv_java342.so";
-        } else if (os.contains("os x")) {
-            // macOS
-            folder = "/opencv-3.4.2/build/lib/libopencv_java342.dylib";
-        } else if (os.contains("win")) {
-            // Windows
-            folder = "\\opencv-3.4.2\\build\\lib\\libopencv_java342.dll";
-        } else {
-            // TODO: Pop-Up mit Warnhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
-            System.out.println("OS noch nicht unterstützt, kommt noch: Issue auf GitHub verfassen!");
-            System.exit(1);
-            return;
+        switch (SysUTIL.getOS()) {
+            case WINDOWS:
+                folder = "\\opencv-3.4.2\\build\\lib\\libopencv_java342.dll";
+                break;
+            case MACOSX:
+                folder = "/opencv-3.4.2/build/lib/libopencv_java342.dylib";
+                break;
+            case LINUX:
+                folder = "/opencv-3.4.2/build/lib/libopencv_java342.so";
+                break;
+            default:
+                // TODO: Pop-Up mit Warnhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
+                System.out.println("OS noch nicht unterstützt, kommt noch: Issue auf GitHub verfassen!");
+                System.exit(1);
+                return;
         }
 
-        String library_path = System.getenv("HOME") + folder;
+        String library_path = SysUTIL.getHomeDir() + folder;
         if (!new File(library_path).exists()) {
             // TODO: Pop-Up mit Fehlerhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
             System.out.println("OpenCV 3.4.2 konnte nicht gefunden werden!");
