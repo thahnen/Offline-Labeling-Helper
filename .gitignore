@@ -1,2 +1,10 @@
 # otherwise Git-Pulls cannot be done (files too large/ >100MB)
 /RTDLH/build/
+
+# otherwise IntelliJ is messed up on the different pcs!
+/RTDLH/.idea/**/workspace.xml
+/RTDLH/.idea/**/tasks.xml
+/RTDLH/.idea/**/usage.statistics.xml
+/RTDLH/.idea/**/dictionaries
+/RTDLH/.idea/**/shelf
+/RTDLH/.idea/**/gradle.xml
