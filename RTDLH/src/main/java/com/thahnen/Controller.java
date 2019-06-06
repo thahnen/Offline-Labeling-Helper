@@ -77,8 +77,38 @@ public class Controller {
      */
     @FXML protected void loadVideo(ActionEvent event) {
         /** 1) nachfragen, in welchem Format das Video vorliegt */
+        /*
+        switch (UIUtil.dialogChooseVideoFormat()) {
+            case 0:
+                // AVI-Video, ergo FileChooser
+                break;
+            case 1:
+                // PNG-Frames, ergo DirectoryChooser (oder auch FileChooser?)
+                break;
+            case -1:
+                // Abbruch
+                break;
+        }
+         */
 
-        /** 2) nachfragen, in welchem Format die Label vorliegen */
+        /** 2) Video (in angegebenem Format) laden */
+
+        /** 3) nachfragen, in welchem Format die Label vorliegen */
+        /*
+        switch (UIUtil.dialogChooseLabelFormat()) {
+            case 0:
+                // JSON-Datei, ergo FileChooser
+                break;
+            case 1:
+                // CSV-Datei, ergo FileChooser
+                break;
+            case -1:
+                // Abbruch
+                break;
+        }
+         */
+
+        /** 4) Label (in angegebenem Format) laden */
 
 
         FileChooser chooser = new FileChooser();

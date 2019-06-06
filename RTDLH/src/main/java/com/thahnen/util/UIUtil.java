@@ -133,8 +133,8 @@ public final class UIUtil {
      */
     public static short dialogChooseVideoFormat() {
         final ArrayList<String> options = new ArrayList<>(Arrays.asList(
-                "AVI-Video",
-                "PNG-Frames"
+                "AVI-Video",            // 0 => 1 mal Video
+                "PNG-Frames"            // 1 => X mal PNG
         ));
 
         ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
@@ -158,8 +158,8 @@ public final class UIUtil {
      */
     public static short dialogChooseLabelFormat() {
         final ArrayList<String> options = new ArrayList<>(Arrays.asList(
-                "JSON",
-                "CSV (Darkflow)"
+                "JSON",                 // 0 => 1 mal JSON
+                "CSV (Darkflow)"        // 1 => 1 mal CSV
         ));
 
         ChoiceDialog dialog = new ChoiceDialog(options.get(0), options);
