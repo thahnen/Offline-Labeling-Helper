@@ -16,6 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        // TODO: die Monitorgroesse ueberpruefen, ggf unterschiedliche FXML laden!
         Scene scene = new Scene((Pane) FXMLLoader.load(getClass().getClassLoader().getResource("UI.fxml")));
         primaryStage.setScene(scene);
 
@@ -26,10 +27,21 @@ public class Main extends Application {
         primaryStage.setOnCloseRequest((new EventHandler<>() {
             @Override
             public void handle(WindowEvent windowEvent) {
-                // do it, just do it!
+                // TODO: Dialog zum speichern etc!
                 System.out.println("Wird geschlossen!");
             }
         }));
+
+        // Einen EventHandler dafuer setzen, wenn Fenstergroesse veraendert wird!
+        // TODO: kommt noch, sollte eigentlich nur die FXML-Elemente anpassen!
+        primaryStage.widthProperty().addListener((observer, oldValue, newValue) -> {
+            System.out.println("Fensterbreite veraendert von " + oldValue + " zu " + newValue);
+        });
+        primaryStage.heightProperty().addListener((observer, oldValue, newValue) -> {
+            System.out.println("Fensterhiehe veraendert von " + oldValue + " zu " + newValue);
+        });
+
+
         primaryStage.show();
     }
 
