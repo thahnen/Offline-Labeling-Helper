@@ -1,4 +1,5 @@
 module RTDLH {
+    requires java.desktop;
     requires javafx.fxml;
     requires javafx.controls;
     requires json.simple;

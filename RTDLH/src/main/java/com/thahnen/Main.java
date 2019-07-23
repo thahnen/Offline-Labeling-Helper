@@ -14,43 +14,76 @@ import java.io.File;
 
 public class Main extends Application {
 
+    private static int error_nr;
+
+    /**
+     *  Runs after main!
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        // TODO: die Monitorgroesse ueberpruefen, ggf unterschiedliche FXML laden!
-        Scene scene = new Scene((Pane) FXMLLoader.load(getClass().getClassLoader().getResource("UI.fxml")));
+    public void start(Stage primaryStage) throws Exception {
+        String fxml;
+        String title;
+
+        switch (error_nr) {
+            case 1:
+                fxml = "OSNotSupportedUI.fxml";
+                title = "OS not supported :(";
+                break;
+            case 2:
+                fxml = "OpenCVNotFoundUI.fxml";
+                title = "OpenCV 3.4.2 not found!";
+                break;
+            case 3:
+                fxml = "OpenCVNotLoadableUI.fxml";
+                title = "OpenCV 3.4.2 not loadable!";
+                break;
+            default:
+                // TODO: die Monitorgroesse ueberpruefen, ggf unterschiedliche FXML laden, -> bei der Standard-UI!
+                fxml = "UI.fxml";
+                title = "RTD Labeling Helper";
+                break;
+        }
+
+        // FXML laden
+        Scene scene = new Scene((Pane) FXMLLoader.load(getClass().getClassLoader().getResource(fxml)));
         primaryStage.setScene(scene);
 
         // Titel setzen
-        primaryStage.setTitle("RTD Labeling Helper");
+        primaryStage.setTitle(title);
 
-        // Einen EventHandler dafuer setzen, wenn Fenster geschlossen werden soll
-        primaryStage.setOnCloseRequest((new EventHandler<>() {
-            @Override
-            public void handle(WindowEvent windowEvent) {
-                // TODO: Dialog zum speichern etc!
-                System.out.println("Wird geschlossen!");
-            }
-        }));
+        // Handhaben, was bei der normalen UI passieren soll!
+        if (error_nr == 0) {
+            primaryStage.setOnCloseRequest((new EventHandler<>() {
+                @Override
+                public void handle(WindowEvent windowEvent) {
+                    // TODO: Dialog zum speichern etc!
+                    System.out.println("Wird geschlossen!");
+                }
+            }));
 
-        // Einen EventHandler dafuer setzen, wenn Fenstergroesse veraendert wird!
-        // TODO: kommt noch, sollte eigentlich nur die FXML-Elemente anpassen!
-        primaryStage.widthProperty().addListener((observer, oldValue, newValue) -> {
-            System.out.println("Fensterbreite veraendert von " + oldValue + " zu " + newValue);
-        });
-        primaryStage.heightProperty().addListener((observer, oldValue, newValue) -> {
-            System.out.println("Fensterhiehe veraendert von " + oldValue + " zu " + newValue);
-        });
+            // Einen EventHandler dafuer setzen, wenn Fenstergroesse veraendert wird!
+            // TODO: kommt noch, sollte eigentlich nur die FXML-Elemente anpassen!
+            primaryStage.widthProperty().addListener((observer, oldValue, newValue) -> {
+                System.out.println("Fensterbreite veraendert von " + oldValue + " zu " + newValue);
+            });
+            primaryStage.heightProperty().addListener((observer, oldValue, newValue) -> {
+                System.out.println("Fensterhiehe veraendert von " + oldValue + " zu " + newValue);
+            });
+        }
 
-
+        // UI anzeigen
         primaryStage.show();
     }
 
 
-    // TODO: FXML-Dateien erstellen für die (beiden) mögichen Fehlerfälle!
+    /**
+     *  Runs on start
+     */
     public static void main(String[] args) {
-        /** OpenCV 3.4.2 soll erstmal nur im Home-Verzeichnis unterstützt werden! */
+        error_nr = 0;
 
-        String folder;
+        /** OpenCV 3.4.2 soll erstmal nur im Home-Verzeichnis unterstützt werden! */
+        String folder = "";
         switch (SysUTIL.getOS()) {
             case WINDOWS:
                 folder = "\\opencv-3.4.2\\build\\lib\\libopencv_java342.dll";
@@ -62,29 +95,23 @@ public class Main extends Application {
                 folder = "/opencv-3.4.2/build/lib/libopencv_java342.so";
                 break;
             default:
-                // TODO: Pop-Up mit Warnhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
-                System.out.println("OS noch nicht unterstützt, kommt noch: Issue auf GitHub verfassen!");
-                System.exit(1);
-                return;
+                // OS not supported
+                error_nr = 1;
         }
 
-        String library_path = SysUTIL.getHomeDir() + folder;
-        if (!new File(library_path).exists()) {
-            // TODO: Pop-Up mit Fehlerhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
-            System.out.println("OpenCV 3.4.2 konnte nicht gefunden werden!");
-            System.exit(1);
-            return;
-
-        }
-
-        try {
-            // ueber System.getenv("HOME") gemacht, damit es Konten-/BS-unabhaengig ist!
-            System.load(library_path);
-        } catch (Exception e) {
-            // TODO: Pop-Up mit Fehlerhinweis, dann schliessen! Muss ein eigenes JavaFX-FXML sein! Alert funktioniert nicht!
-            System.out.println("OpenCV 3.4.2 konnte nicht geladen werden!");
-            System.exit(1);
-            return;
+        if (error_nr == 0) {
+            String library_path = SysUTIL.getHomeDir() + folder;
+            if (!new File(library_path).exists()) {
+                // OpenCV not found
+                error_nr = 2;
+            } else {
+                try {
+                    System.load(library_path);
+                } catch (Exception e) {
+                    // OpenCV not loadable
+                    error_nr = 3;
+                }
+            }
         }
 
         launch(args);

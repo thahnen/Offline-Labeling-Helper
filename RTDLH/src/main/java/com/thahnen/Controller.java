@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 /***********************************************************************************************************************
  *
- *      INHALT DER KLASSE CONTROLLER
+ *      INHALT DER KLASSE Controller
  *      ============================
  *
  *      => der Controller, der an die GUI gebunden ist und alle Aktionen verarbeitet!
@@ -55,7 +55,6 @@ public class Controller {
     @FXML private TextField txtLabelId;
 
     private Model model;
-
     private int currentSelectedLabelId;
 
 
