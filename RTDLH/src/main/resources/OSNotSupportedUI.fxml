@@ -6,20 +6,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="frameWindow" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thahnen.controller.OSNotSupportedUIController">
+<Pane fx:id="frameWindow" maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thahnen.controller.OSNotSupportedUIController">
    <children>
-      <Button fx:id="btnCloseWindow" layoutX="310.0" layoutY="350.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="170.0" text="OK, schliessen" />
+      <Button fx:id="btnCloseWindow" layoutX="310.0" layoutY="350.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="175.0" text="OK, schliessen" />
       <Label layoutX="65.0" layoutY="30.0" prefHeight="30.0" prefWidth="470.0" text="Ihr Betriebssystem wird (noch) nicht unterstützt!" underline="true">
          <font>
-            <Font size="20.0" />
+            <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="btnCreateGitHubIssue" layoutX="120.0" layoutY="350.0" mnemonicParsing="false" onAction="#openGitHubIssuePage" prefHeight="30.0" prefWidth="170.0" text="GitHub-Issue verfassen!" />
-      <TextArea fx:id="txtSystemInformation" layoutX="50.0" layoutY="90.0" prefHeight="250.0" prefWidth="500.0" />
-      <Label layoutX="125.0" layoutY="60.0" prefHeight="20.0" prefWidth="350.0" text="Informationen zu ihrem System (bitte mit angeben)">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <Button fx:id="btnCreateGitHubIssue" layoutX="115.0" layoutY="350.0" mnemonicParsing="false" onAction="#openGitHubIssuePage" prefHeight="30.0" prefWidth="175.0" text="GitHub-Issue verfassen!" />
+      <TextArea fx:id="txtSystemInformation" editable="false" layoutX="50.0" layoutY="90.0" prefHeight="250.0" prefWidth="500.0" />
+      <Label layoutX="125.0" layoutY="60.0" prefHeight="20.0" prefWidth="350.0" text="Informationen zu ihrem System (bitte mit angeben)" />
    </children>
 </Pane>

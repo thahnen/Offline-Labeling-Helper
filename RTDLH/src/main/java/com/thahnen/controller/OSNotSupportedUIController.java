@@ -32,8 +32,14 @@ public class OSNotSupportedUIController {
     @FXML TextArea txtSystemInformation;
 
 
-    public OSNotSupportedUIController() {
-        // txtSystemInformation ausfüllen
+    public OSNotSupportedUIController() { }
+
+
+    /**
+     *  Runs when the FXML-UI is loaded (FXML-Elements are available)
+     */
+    @FXML public void initialize() {
+        txtSystemInformation.appendText("Test123");
     }
 
 
@@ -41,12 +47,20 @@ public class OSNotSupportedUIController {
      *  Browser öffnen, um GitHub-Issue zu verfassen
      */
     @FXML protected void openGitHubIssuePage(ActionEvent event) {
-        try {
-            Desktop.getDesktop().browse(
-                    new URL("https://github.com/thahnen/Offline-Labeling-Helper/issues").toURI()
-            );
-        } catch (Exception e) {
-            // TODO: muss hier eigentlich überhaupt irgendwas gemacht werden?
+        if (Desktop.isDesktopSupported()) {
+            new Thread(() -> {
+                try {
+                    Desktop.getDesktop().browse(
+                            new URL("https://github.com/thahnen/Offline-Labeling-Helper/issues").toURI()
+                    );
+                } catch (Exception e) {
+                    // TODO: muss hier eigentlich überhaupt irgendwas gemacht werden?
+                    e.printStackTrace();
+                }
+            }).start();
+        } else {
+            // TODO: Alert, dass kein Browser geöffnet werden kann und daher Link anzeigen, dass man den selber öffnet!
+            System.out.println("Browser zu öffnen wird leider nicht unterstützt!");
         }
     }
 

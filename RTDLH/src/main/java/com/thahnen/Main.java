@@ -69,6 +69,8 @@ public class Main extends Application {
             primaryStage.heightProperty().addListener((observer, oldValue, newValue) -> {
                 System.out.println("Fensterhiehe veraendert von " + oldValue + " zu " + newValue);
             });
+        } else {
+            primaryStage.setResizable(false);
         }
 
         // UI anzeigen
@@ -114,6 +116,8 @@ public class Main extends Application {
             }
         }
 
+        // TODO: kommt noch weg, ist nur da um Fehler zu testen!
+        error_nr = 1;
         launch(args);
     }
 }
