@@ -3,6 +3,7 @@
     => entstandene ZIP-Datei unter: build/distributions entnehmen!
  */
 
+// Welche Plugins werden benötigt
 plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.7'
@@ -13,6 +14,7 @@ repositories {
     mavenCentral()
 }
 
+// Da sich Unit-Test-Module überschneiden, in den Dependencies das "hamcrest-core"-Modul deaktivieren!
 dependencies {
     compile(group: 'org.openpnp', name: 'opencv', version: '3.4.2-1') {
         exclude group: "org.hamcrest", module: "hamcrest-core"
@@ -23,6 +25,7 @@ dependencies {
     }
 }
 
+// Angeben, welche JavaFX-Module benötigt werden!
 javafx {
     version "12"
     modules = ["javafx.controls", "javafx.fxml"]
@@ -39,11 +42,3 @@ jlink {
 
     imageZip = project.file("${buildDir}/dist/RTDLH-${javafx.platform.classifier}.zip")
 }
-
-/* NICHT MEHR NOETIG
-jar {
-    manifest {
-        attributes "Main-Class" : "com.thahnen.Main"
-    }
-}
- */
