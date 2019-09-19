@@ -2,7 +2,7 @@ package com.thahnen;
 
 import com.thahnen.data.FrameData;
 import com.thahnen.util.FileUtil;
-import com.thahnen.util.SysUTIL;
+import com.thahnen.util.SysUtil;
 import com.thahnen.util.UIUtil;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -90,7 +90,7 @@ public class Controller {
         /** 2) Video (in angegebenem Format) laden */
         if (singleFile) {
             FileChooser chooser = new FileChooser();
-            chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
+            chooser.setInitialDirectory(new File(SysUtil.getHomeDir()));
             chooser.setTitle("Video-Datei auswählen!");
 
             File video = chooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
@@ -134,7 +134,7 @@ public class Controller {
 
         /** 4) Label (in angegebenem Format) laden */
         FileChooser chooser = new FileChooser();
-        chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
+        chooser.setInitialDirectory(new File(SysUtil.getHomeDir()));
         chooser.setTitle("Label-Datei auswählen!");
 
         File label = chooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
@@ -203,7 +203,7 @@ public class Controller {
     @FXML protected void saveLabels(ActionEvent event) {
         // TODO: ggf noch eine Extension vorgeben, je nachdem in welchem Format geladen!
         FileChooser chooser = new FileChooser();
-        chooser.setInitialDirectory(new File(SysUTIL.getHomeDir()));
+        chooser.setInitialDirectory(new File(SysUtil.getHomeDir()));
         chooser.setTitle("JSON-Datei zum abspeichern auswählen!");
 
         File datei = chooser.showSaveDialog(((Node) event.getSource()).getScene().getWindow());

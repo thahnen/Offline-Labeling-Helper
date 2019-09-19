@@ -238,5 +238,6 @@ public final class FileUtil {
         // 3) Label-Array abspeichern
         FileWriter writer = new FileWriter(file);
         writer.write(array.toJSONString());
+        writer.close();
     }
 }

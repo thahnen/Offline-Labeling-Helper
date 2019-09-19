@@ -138,10 +138,7 @@ public final class UIUtil {
         dialog.setHeaderText("Video-Format waehlen!");
 
         Optional<String> res = dialog.showAndWait();
-        if (res.isPresent()) {
-            return (byte) options.indexOf(res.get());
-        }
-        return -1;
+        return res.map(s -> (byte) options.indexOf(s)).orElse((byte)-1);
     }
 
 

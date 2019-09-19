@@ -1,6 +1,6 @@
 package com.thahnen;
 
-import com.thahnen.util.SysUTIL;
+import com.thahnen.util.SysUtil;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +21,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        String fxml;
-        String title;
+        String fxml, title;
 
         switch (error_nr) {
             case 1:
@@ -38,7 +37,7 @@ public class Main extends Application {
                 title = "OpenCV 3.4.2 not loadable!";
                 break;
             default:
-                // TODO: die Monitorgroesse ueberpruefen, ggf unterschiedliche FXML laden, -> bei der Standard-UI!
+                // TODO: die Monitorgroesse ueberpruefen, ggf unterschiedliche FXML laden -> bei der Standard-UI!
                 fxml = "UI.fxml";
                 title = "RTD Labeling Helper";
                 break;
@@ -86,7 +85,7 @@ public class Main extends Application {
 
         /** OpenCV 3.4.2 soll erstmal nur im Home-Verzeichnis unterstützt werden! */
         String folder = "";
-        switch (SysUTIL.getOS()) {
+        switch (SysUtil.getOS()) {
             case WINDOWS:
                 folder = "\\opencv-3.4.2\\build\\lib\\libopencv_java342.dll";
                 break;
@@ -102,7 +101,7 @@ public class Main extends Application {
         }
 
         if (error_nr == 0) {
-            String library_path = SysUTIL.getHomeDir() + folder;
+            String library_path = SysUtil.getHomeDir() + folder;
             if (!new File(library_path).exists()) {
                 // OpenCV not found
                 error_nr = 2;

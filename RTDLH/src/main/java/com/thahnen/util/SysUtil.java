@@ -1,6 +1,6 @@
 package com.thahnen.util;
 
-public final class SysUTIL {
+public final class SysUtil {
 
     public enum OS {
         WINDOWS,
@@ -12,10 +12,10 @@ public final class SysUTIL {
 
     public static OS getOS() {
         String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) return OS.WINDOWS;
-        else if (os.contains("linux")) return OS.LINUX;
-        else if (os.contains("mac")) return OS.MACOSX;
-        else return OS.OTHER;
+        if (os.contains("win"))         return OS.WINDOWS;
+        else if (os.contains("linux"))  return OS.LINUX;
+        else if (os.contains("mac"))    return OS.MACOSX;
+        else                            return OS.OTHER;
     }
 
     public static String getHomeDir() {
